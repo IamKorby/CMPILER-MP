@@ -5,48 +5,215 @@ grammar JavaBinks;
 // token: (syntax: [Name] : [definition] ;)
 // rule: (syntax: [name] : [definition] ;)
 
+r   :   declaration ;
+
+// RULES
+
+datatype
+    :   BOOLEAN
+    |   CHAR
+    |   FLOAT
+    |   INT
+    |   STRING
+    ;
+
+returntype
+    :   BOOLEAN
+    |   CHAR
+    |   FLOAT
+    |   INT
+    |   STRING
+    |   VOID
+    ;
+
+operator
+    :   ADD
+    |   SUB
+    |   MUL
+    |   DIV
+    |   MOD
+    ;
+
+specialOperator
+    :   INCR        // increment
+    |   DECR        // decrement
+    |   ADD_ASSIGN
+    |   SUB_ASSIGN
+    |   MUL_ASSIGN
+    |   DIV_ASSIGN
+    |   MOD_ASSIGN
+    ;
+
+logicalOperator
+    :   NOT
+    |   AND
+    |   OR
+    |   GT          // Greater than
+    |   LT          // Less than
+    |   EQUAL       // this is ==
+    |   GE          // Greater than or equal
+    |   LE          // Less than or equal
+    |   NOTEQUAL
+    ;
+
+value
+    :   BooleanLiteral
+    |   CharLiteral
+    |   FloatLiteral
+    |   IntegerLiteral
+    |   StringLiteral
+    ;
+
+specialValue
+    :   value
+    |   VariableFuncName
+    // TODO: Add expression
+    |   functionCallNoTerminator
+    ;
+
+
+// 1) Variable Declaration/Initialization
+declaration
+    :   datatype singleDec SEMI
+    |   datatype multiDec SEMI
+    ;
+multiDec
+    :   singleDec COMMA multiDec
+    |   singleDec
+    ;
+singleDec
+    :   VariableFuncName
+    |   VariableFuncName ASSIGN specialValue
+    ;
+
+// 2) Assignment Statement
+assignment
+    :   VariableFuncName ASSIGN specialValue SEMI
+    ;
+
+// 3) Conditional Statement
+conditionalStatement
+    :   IF LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
+    |   ELSEIF LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
+    |   ELSE LBRACE codeBlock RBRACE
+    |   SWITCH LPAREN conditionalExpression RPAREN LBRACE switchBlock RBRACE
+    ;
+conditionalExpression
+    :   specialValue logicalOperator specialValue
+    |   specialValue
+    ;
+switchBlock
+    :   CASE value ':' LBRACE codeBlock RBRACE
+    |   CASE value ':' LBRACE codeBlock RBRACE BREAK SEMI
+    |   DEFAULT ':' LBRACE codeBlock RBRACE
+    ;
+
+// 4) Loop/Iterative Statement
+// TODO: Fix the for loop syntax
+loopStatement
+    :   WHILE LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
+    |   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RPAREN SEMI
+    |   FOR LPAREN declaration conditionalExpression SEMI VariableFuncName operator RPAREN LBRACE codeBlock RBRACE
+    ;
+
+// TODO: 5) Expressions
+expression
+    :
+    ;
+
+// 6) Function Declaration/Definition
+functionDeclaration
+    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
+    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
+    ;
+declarationParameter
+    :   datatype VariableFuncName multiDeclarationParameter
+    |   singleDeclarationParameter
+    ;
+multiDeclarationParameter
+    :   COMMA declarationParameter
+    ;
+singleDeclarationParameter
+    :   datatype VariableFuncName
+    ;
+returnStatement
+    :   RETURN specialValue
+    ;
+
+// 7) Function Call
+functionCall
+    :   VariableFuncName LPAREN callParameter RPAREN SEMI
+    ;
+functionCallNoTerminator
+    :   VariableFuncName LPAREN callParameter RPAREN SEMI
+    ;
+callParameter
+    :   specialValue COMMA callParameter
+    |   specialValue
+    ;
+
+// 8) Arrays
+array
+    :   datatype arrayAssignment
+    ;
+arrayAssignment
+    :   VariableFuncName LBRACK Digits RBRACK
+    |   VariableFuncName LBRACK RBRACK ASSIGN LBRACE list RBRACE
+    ;
+list
+    :   boolList
+    |   charList
+    |   floatList
+    |   integerList
+    |   stringList
+    ;
+boolList
+    :   BooleanLiteral COMMA boolList
+    |   BooleanLiteral
+    ;
+charList
+    :   CharLiteral COMMA charList
+    |   CharLiteral
+    ;
+floatList
+    :   FloatLiteral COMMA floatList
+    |   FloatLiteral
+    ;
+integerList
+    :   IntegerLiteral COMMA integerList
+    |   IntegerLiteral
+    ;
+stringList
+    :   StringLiteral COMMA stringList
+    |   StringLiteral
+    ;
+
+// 9) Code Block
+// TODO: Add expression
+codeBlock
+    :   declaration codeBlock
+    |   assignment codeBlock
+    |   conditionalStatement codeBlock
+    |   loopStatement codeBlock
+    |   functionDeclaration codeBlock
+    |   array codeBlock
+    // TODO: |   expression codeBlock
+    |   // empty
+    ;
+
+// 10) Main
+main
+    :   INT 'main' LPAREN RPAREN LBRACE codeBlock RETURN IntegerLiteral SEMI RBRACE
+    ;
+
 // LEXER TOKENS
 // Keywords
-
-//ABSTRACT      : 'abstract';
-//ASSERT        : 'assert';
-//BYTE          : 'byte';
-//CATCH         : 'catch';
-//CLASS         : 'class';
-//CONST         : 'const';
-//CONTINUE      : 'continue';
-//ENUM          : 'enum';
-//EXTENDS       : 'extends';
-//FINAL         : 'final';
-//FINALLY       : 'finally';
-//GOTO          : 'goto';
-//IMPLEMENTS    : 'implements';
-//IMPORT        : 'import';
-//INSTANCEOF    : 'instanceof';
-//INTERFACE     : 'interface';
-//NATIVE        : 'native';
-//NEW           : 'new';
-//PACKAGE       : 'package';
-//PRIVATE       : 'private';
-//PROTECTED     : 'protected';
-//PUBLIC        : 'public';
-//SHORT         : 'short';
-//STATIC        : 'static';
-//STRICTFP      : 'strictfp';
-//SUPER         : 'super';
-//SYNCHRONIZED  : 'synchronized';
-//THIS          : 'this';
-//THROW         : 'throw';
-//THROWS        : 'throws';
-//TRANSIENT     : 'transient';
-//TRY           : 'try';
-//VOLATILE      : 'volatile';
-
 BREAK         : 'fett';
 CASE          : 'clone';
 DEFAULT       : 'kaminoans';
 DO            : 'iloveyou';
 ELSE          : 'storm';
+ELSEIF        : 'stormtrooper';
 FOR           : 'force';
 IF            : 'trooper';
 SWITCH        : 'kamino';
@@ -54,20 +221,18 @@ WHILE         : 'iknow';
 RETURN        : 'jedi';
 
 // Datatypes
-// ARRAY??
-// ARRAYLIST??
 BOOLEAN       : 'boolean';
 CHAR          : 'char';
-//DOUBLE        : 'double';
 FLOAT         : 'float';
 INT           : 'int';
-//LONG          : 'long';
 STRING        : 'String';
-VOID          : 'void';
+VOID          : 'void';     // return type
 
-// Array Literal
-
-// ArrayList Literal
+// Since Variable Name & Function Name are the same
+// COMBINE THEM ANYWAY
+VariableFuncName
+    :   Letters Digit*
+    ;
 
 // Boolean Literal
 BooleanLiteral
@@ -79,12 +244,12 @@ BooleanLiteral
 CharLiteral
     :   '\'' Letter '\''
     |   '\'' Space '\''
+    |   '\'' Digit '\''
     ;
 
 // Float Literal
 FloatLiteral
     :   NegativeSign? Digits '.' Digits?
-    |   '.' Digits?
     ;
 
 // Integer Literal
@@ -103,12 +268,12 @@ NullLiteral
     ;
 
 // Fragments: Number related
-fragment
+
 Digits
     :   Digit+
     ;
 
-fragment
+
 Digit
     :   [0-9]
     ;
@@ -146,7 +311,7 @@ Letter
 
 fragment
 StringCharacters
-    :   [A-Za-z0-9 .!?_+\-,@#$%^&*();\\\/|<>"']*
+    :   [A-Za-z0-9 .!?_+\-,@#$%^&*();\\\/|<>"' ]*
     ;
 
 // Operators
