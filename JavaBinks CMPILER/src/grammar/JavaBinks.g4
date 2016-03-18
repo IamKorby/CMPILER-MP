@@ -5,7 +5,13 @@ grammar JavaBinks;
 // token: (syntax: [Name] : [definition] ;)
 // rule: (syntax: [name] : [definition] ;)
 
-r   :   declaration ;
+start
+    :   main r
+    ;
+r
+    :   functionDeclaration
+    |   // empty
+    ;
 
 // RULES
 
@@ -35,13 +41,16 @@ operator
     ;
 
 specialOperator
-    :   INCR        // increment
-    |   DECR        // decrement
-    |   ADD_ASSIGN
+    :   ADD_ASSIGN
     |   SUB_ASSIGN
     |   MUL_ASSIGN
     |   DIV_ASSIGN
     |   MOD_ASSIGN
+    ;
+
+special2Operator
+    :   INCR        // increment
+    |   DECR        // decrement
     ;
 
 logicalOperator
@@ -93,27 +102,78 @@ assignment
 
 // 3) Conditional Statement
 conditionalStatement
+    :   ifBlock
+    |   switchBlock
+    ;
+ifBlock
+    :   if
+    |   if elseIfBlock
+    ;
+elseIfBlock
+    :   elseIf elseIfBlock
+    |   elseIf
+    |   else
+    ;
+if
     :   IF LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
-    |   ELSEIF LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
-    |   ELSE LBRACE codeBlock RBRACE
-    |   SWITCH LPAREN conditionalExpression RPAREN LBRACE switchBlock RBRACE
+    ;
+else
+    :   ELSE LBRACE codeBlock RBRACE
+    ;
+elseIf
+    :   ELSEIF LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
+    ;
+switchBlock
+    :   SWITCH LPAREN conditionalExpression RPAREN LBRACE switchCase RBRACE
+    ;
+switchCase
+    :   caseBlock switchCase
+    |   caseBlock
+    |   defaultBlock
+    ;
+caseBlock
+    :   case caseBlock
+    |   case
+    ;
+case
+    :   CASE value ':' LBRACE codeBlock RBRACE
+    |   CASE value ':' LBRACE codeBlock RBRACE BREAK SEMI
+    ;
+defaultBlock
+    :   DEFAULT ':' LBRACE codeBlock RBRACE
+    |   DEFAULT ':' LBRACE codeBlock RBRACE BREAK SEMI
     ;
 conditionalExpression
     :   specialValue logicalOperator specialValue
     |   specialValue
     ;
-switchBlock
-    :   CASE value ':' LBRACE codeBlock RBRACE
-    |   CASE value ':' LBRACE codeBlock RBRACE BREAK SEMI
-    |   DEFAULT ':' LBRACE codeBlock RBRACE
-    ;
 
 // 4) Loop/Iterative Statement
-// TODO: Fix the for loop syntax
 loopStatement
+    :   whileBlock
+    |   doWhileBlock
+    |   forBlock
+    ;
+whileBlock
     :   WHILE LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
-    |   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RPAREN SEMI
-    |   FOR LPAREN declaration conditionalExpression SEMI VariableFuncName operator RPAREN LBRACE codeBlock RBRACE
+    ;
+doWhileBlock
+    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RBRACE SEMI
+    ;
+forBlock
+    :   FOR LPAREN decValue SEMI conditionalExpression SEMI step RPAREN LBRACE codeBlock RBRACE
+    ;
+decValue
+    :   INT VariableFuncName ASSIGN initValue
+    |   VariableFuncName ASSIGN initValue
+    ;
+initValue
+    :   IntegerLiteral
+    |   VariableFuncName
+    ;
+step
+    :   VariableFuncName special2Operator
+    |   VariableFuncName specialOperator IntegerLiteral
     ;
 
 // TODO: 5) Expressions
@@ -127,14 +187,14 @@ functionDeclaration
     |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
     ;
 declarationParameter
-    :   datatype VariableFuncName multiDeclarationParameter
+    :   returntype VariableFuncName multiDeclarationParameter
     |   singleDeclarationParameter
     ;
 multiDeclarationParameter
     :   COMMA declarationParameter
     ;
 singleDeclarationParameter
-    :   datatype VariableFuncName
+    :   returntype VariableFuncName
     ;
 returnStatement
     :   RETURN specialValue
@@ -145,7 +205,7 @@ functionCall
     :   VariableFuncName LPAREN callParameter RPAREN SEMI
     ;
 functionCallNoTerminator
-    :   VariableFuncName LPAREN callParameter RPAREN SEMI
+    :   VariableFuncName LPAREN callParameter RPAREN
     ;
 callParameter
     :   specialValue COMMA callParameter
@@ -196,6 +256,7 @@ codeBlock
     |   conditionalStatement codeBlock
     |   loopStatement codeBlock
     |   functionDeclaration codeBlock
+    |   functionCall codeBlock
     |   array codeBlock
     // TODO: |   expression codeBlock
     |   // empty
