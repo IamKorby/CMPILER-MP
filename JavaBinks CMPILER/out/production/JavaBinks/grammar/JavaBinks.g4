@@ -6,7 +6,7 @@ grammar JavaBinks;
 // rule: (syntax: [name] : [definition] ;)
 
 start
-    :   main r EOF
+    :   main r
     ;
 r
     :   functionDeclaration
@@ -264,10 +264,7 @@ codeBlock
 
 // 10) Main
 main
-    :   INT 'main' LPAREN RPAREN LBRACE codeBlock returnMain SEMI RBRACE
-    ;
-returnMain
-    :   RETURN IntegerLiteral
+    :   INT 'main' LPAREN RPAREN LBRACE codeBlock RETURN IntegerLiteral SEMI RBRACE
     ;
 
 // LEXER TOKENS
@@ -315,14 +312,14 @@ CharLiteral
 FloatLiteral
     :   NegativeSign Digits '.' Digits
     |   Digits '.' Digits
-    |   IntegerLiteral
+    |   Digits
     ;
 
 // Integer Literal
 IntegerLiteral
-    :   Digit
-    |   Digits
-    |   NegativeSign Digits
+    :   '1'
+    //:   Digits
+    //|   NegativeSign Digits
     ;
 
 // String Literal
@@ -341,10 +338,12 @@ Digits
     :   [0-9]+
     ;
 
+
 Digit
     :   [0-9]
     ;
 
+fragment
 NegativeSign
     :   '-'
     ;
