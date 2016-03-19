@@ -76,7 +76,7 @@ value
 specialValue
     :   value
     |   VariableFuncName
-    // TODO: Add expression
+    |   expression
     |   functionCallNoTerminator
     ;
 
@@ -158,7 +158,7 @@ whileBlock
     :   WHILE LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
     ;
 doWhileBlock
-    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RBRACE SEMI
+    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RPAREN SEMI
     ;
 forBlock
     :   FOR LPAREN decValue SEMI conditionalExpression SEMI step RPAREN LBRACE codeBlock RBRACE
@@ -176,10 +176,18 @@ step
     |   VariableFuncName specialOperator IntegerLiteral
     ;
 
-// TODO: 5) Expressions
+// 5) Expressions
 expression
-    :
+    :   expr
     ;
+expr
+    :   value
+    |   VariableFuncName
+    |   functionCallNoTerminator
+    |   expr operator expr
+    |   LPAREN expr RPAREN
+    ;
+
 
 // 6) Function Declaration/Definition
 functionDeclaration
@@ -249,7 +257,6 @@ stringList
     ;
 
 // 9) Code Block
-// TODO: Add expression
 codeBlock
     :   declaration codeBlock
     |   assignment codeBlock
@@ -258,7 +265,7 @@ codeBlock
     |   functionDeclaration codeBlock
     |   functionCall codeBlock
     |   array codeBlock
-    // TODO: |   expression codeBlock
+    |   expression codeBlock
     |   // empty
     ;
 
@@ -313,8 +320,8 @@ CharLiteral
 
 // Float Literal
 FloatLiteral
-    :   NegativeSign Digits '.' Digits
-    |   Digits '.' Digits
+    :// NegativeSign Digits '.' Digits
+ /* |*/ Digits '.' Digits
     |   IntegerLiteral
     ;
 
@@ -322,7 +329,7 @@ FloatLiteral
 IntegerLiteral
     :   Digit
     |   Digits
-    |   NegativeSign Digits
+   // |   NegativeSign Digits
     ;
 
 // String Literal
@@ -344,11 +351,11 @@ Digits
 Digit
     :   [0-9]
     ;
-
+/*
 NegativeSign
     :   '-'
     ;
-
+*/
 fragment
 BooleanDigit
     :   [01]
