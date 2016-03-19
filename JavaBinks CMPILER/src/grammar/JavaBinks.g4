@@ -9,7 +9,7 @@ start
     :   main r EOF
     ;
 r
-    :   functionDeclaration
+    :   functionDeclaration r
     |   // empty
     ;
 
@@ -83,8 +83,7 @@ specialValue
 
 // 1) Variable Declaration/Initialization
 declaration
-    :   datatype singleDec SEMI
-    |   datatype multiDec SEMI
+    :   datatype multiDec SEMI
     ;
 multiDec
     :   singleDec COMMA multiDec
@@ -191,11 +190,11 @@ expr
 
 // 6) Function Declaration/Definition
 functionDeclaration
-    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
-    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
+    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
+    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
     ;
 declarationParameter
-    :   returntype VariableFuncName multiDeclarationParameter
+    :   singleDeclarationParameter multiDeclarationParameter
     |   singleDeclarationParameter
     ;
 multiDeclarationParameter
@@ -203,9 +202,10 @@ multiDeclarationParameter
     ;
 singleDeclarationParameter
     :   returntype VariableFuncName
+    |
     ;
 returnStatement
-    :   RETURN specialValue
+    :   RETURN specialValue SEMI
     ;
 
 // 7) Function Call
@@ -222,10 +222,10 @@ callParameter
 
 // 8) Arrays
 array
-    :   datatype arrayAssignment
+    :   datatype arrayAssignment SEMI
     ;
 arrayAssignment
-    :   VariableFuncName LBRACK Digits RBRACK
+    :   VariableFuncName LBRACK PositiveIntegerLiteral RBRACK
     |   VariableFuncName LBRACK RBRACK ASSIGN LBRACE list RBRACE
     ;
 list
@@ -262,7 +262,6 @@ codeBlock
     |   assignment codeBlock
     |   conditionalStatement codeBlock
     |   loopStatement codeBlock
-    |   functionDeclaration codeBlock
     |   functionCall codeBlock
     |   array codeBlock
     |   expression codeBlock
@@ -307,8 +306,7 @@ VariableFuncName
 
 // Boolean Literal
 BooleanLiteral
-    :   BooleanDigit
-    |   BooleanWord
+    :   BooleanWord
     ;
 
 // Char Literal
@@ -320,6 +318,7 @@ CharLiteral
 
 // Float Literal
 FloatLiteral
+
     :// NegativeSign Digits '.' Digits
  /* |*/ Digits '.' Digits
     |   IntegerLiteral
@@ -327,9 +326,16 @@ FloatLiteral
 
 // Integer Literal
 IntegerLiteral
+    :   PositiveIntegerLiteral
+    |   NegativeSign Digits
+    ;
+
+// Positive Integer Literal
+PositiveIntegerLiteral
     :   Digit
     |   Digits
-   // |   NegativeSign Digits
+ // |   NegativeSign Digits
+
     ;
 
 // String Literal
@@ -343,15 +349,19 @@ NullLiteral
     ;
 
 // Fragments: Number related
-
+fragment
 Digits
-    :   [0-9]+
+    :   Digit+
     ;
 
+fragment
 Digit
-    :   [0-9]
+    :   '+'?[0-9]
     ;
+
 /*
+
+fragment
 NegativeSign
     :   '-'
     ;
