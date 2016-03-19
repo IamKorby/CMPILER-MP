@@ -9,7 +9,7 @@ start
     :   main r EOF
     ;
 r
-    :   functionDeclaration
+    :   functionDeclaration r
     |   // empty
     ;
 
@@ -183,11 +183,11 @@ expression
 
 // 6) Function Declaration/Definition
 functionDeclaration
-    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
-    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
+    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
+    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
     ;
 declarationParameter
-    :   returntype VariableFuncName multiDeclarationParameter
+    :   singleDeclarationParameter multiDeclarationParameter
     |   singleDeclarationParameter
     ;
 multiDeclarationParameter
@@ -195,9 +195,10 @@ multiDeclarationParameter
     ;
 singleDeclarationParameter
     :   returntype VariableFuncName
+    |
     ;
 returnStatement
-    :   RETURN specialValue
+    :   RETURN specialValue SEMI
     ;
 
 // 7) Function Call
@@ -214,7 +215,7 @@ callParameter
 
 // 8) Arrays
 array
-    :   datatype arrayAssignment
+    :   datatype arrayAssignment SEMI
     ;
 arrayAssignment
     :   VariableFuncName LBRACK Digits RBRACK
@@ -255,7 +256,6 @@ codeBlock
     |   assignment codeBlock
     |   conditionalStatement codeBlock
     |   loopStatement codeBlock
-    |   functionDeclaration codeBlock
     |   functionCall codeBlock
     |   array codeBlock
     // TODO: |   expression codeBlock
