@@ -327,7 +327,7 @@ FloatLiteral
 // Integer Literal
 IntegerLiteral
     :   PositiveIntegerLiteral
-    |   NegativeSign Digits
+   // |   NegativeSign Digits
     ;
 
 // Positive Integer Literal
