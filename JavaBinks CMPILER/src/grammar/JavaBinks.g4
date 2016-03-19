@@ -170,11 +170,12 @@ decValue
     ;
 initValue
     :   IntegerLiteral
+    |   NegativeIntegerLiteral
     |   VariableFuncName
     ;
 step
     :   VariableFuncName special2Operator
-    |   VariableFuncName specialOperator IntegerLiteral
+    |   VariableFuncName specialOperator (IntegerLiteral | NegativeIntegerLiteral)
     ;
 
 // 5) Expressions
@@ -187,6 +188,7 @@ expr
     |   functionCallNoTerminator
     |   expr operator expr
     |   LPAREN expr RPAREN
+    |   VariableFuncName special2Operator SEMI?
     ;
 
 
@@ -305,7 +307,7 @@ VOID          : 'void';     // return type
 // Since Variable Name & Function Name are the same
 // COMBINE THEM ANYWAY
 VariableFuncName
-    :   Letters Digit*
+    :   Letters Digits?
     ;
 
 // Boolean Literal
@@ -339,8 +341,7 @@ NegativeIntegerLiteral
 
 // Positive Integer Literal
 PositiveIntegerLiteral
-    :   Digit
-    |   Digits
+    :   '+'? Digits
     ;
 
 // String Literal
@@ -359,19 +360,13 @@ Digits
     ;
 
 Digit
-    :   '+'?[0-9]
+    :   [0-9]
     ;
 
 fragment
 NegativeSign
     :   '-'
     ;
-
-fragment
-BooleanDigit
-    :   [01]
-    ;
-
 
 BooleanWord
     :   'true'
