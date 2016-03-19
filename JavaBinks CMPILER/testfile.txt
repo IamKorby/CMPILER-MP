@@ -1,0 +1,65 @@
+int main()
+{
+	int f = -111;
+	f = 1;
+	f = +1;
+	f = -1;
+	c = '1';
+
+	j = 5 - 5;
+	z++;
+
+	int x = 5 + +5;
+	aa = 10 + z++ - y-- * -15;
+
+	kamino(cat >= 1)
+	{
+		clone 1 :
+		{
+			int i = 6;
+		}
+		clone 2 :
+		{
+			cat  = dog;
+		}
+		fett;
+		kaminoans :
+		{
+			int i = 1;
+		}
+	}
+
+	iknow(1)
+	{
+	    iloveyou
+	    {
+	        force(i = 0; i < 0; i+=-1)
+	        {
+	        }
+	    }
+	    iknow(1);
+
+	}
+
+	boolean b = true;
+	boolean b = false;
+
+	boolean b[1];
+	int i[] = {1, -1, 2};
+
+
+
+	get();
+
+	jedi 0;
+}
+
+void get1()
+{
+    String hello = "HI";
+}
+
+String getName(int i, String s, boolean b)
+{
+    jedi s;
+}

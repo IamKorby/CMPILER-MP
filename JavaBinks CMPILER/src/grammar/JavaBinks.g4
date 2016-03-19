@@ -240,9 +240,12 @@ list
     |   integerList
     |   stringList
     ;
+// TODO: Fix boolean shits especially boolean b[] = {true};
 boolList
-    :   BooleanLiteral COMMA boolList
-    |   BooleanLiteral
+//    :   BooleanLiteral COMMA boolList
+//    |   BooleanLiteral
+    :   (TRUE | FALSE) COMMA boolList
+    |   (TRUE | FALSE)
     ;
 charList
     :   CharLiteral COMMA charList
@@ -312,8 +315,7 @@ VariableFuncName
 
 // Boolean Literal
 BooleanLiteral
-    :   'true'
-    |   'false'
+    :   (TRUE | FALSE)
     ;
 
 // Char Literal
@@ -392,6 +394,14 @@ Letter
 fragment
 StringCharacters
     :   [A-Za-z0-9 .!?_+\-,@#$%^&*();\\\/|<>"' ]*
+    ;
+
+TRUE
+    :   'true'
+    ;
+
+FALSE
+    :   'false'
     ;
 
 // Operators

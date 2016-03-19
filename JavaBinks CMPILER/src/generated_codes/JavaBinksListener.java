@@ -1,5 +1,5 @@
 // Generated from /Users/hannah/Documents/IntelliJ Path/JavaBinks CMPILER/src/grammar/JavaBinks.g4 by ANTLR 4.5.1
-package grammar;
+package generated_codes;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
