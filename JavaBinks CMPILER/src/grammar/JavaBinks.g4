@@ -76,7 +76,7 @@ value
 specialValue
     :   value
     |   VariableFuncName
-    |   expression
+    // TODO: Add expression
     |   functionCallNoTerminator
     ;
 
@@ -97,6 +97,7 @@ singleDec
 // 2) Assignment Statement
 assignment
     :   VariableFuncName ASSIGN specialValue SEMI
+    |   VariableFuncName specialOperator specialValue SEMI
     ;
 
 // 3) Conditional Statement
@@ -175,18 +176,10 @@ step
     |   VariableFuncName specialOperator IntegerLiteral
     ;
 
-// 5) Expressions
+// TODO: 5) Expressions
 expression
-    :   expr
+    :
     ;
-expr
-    :   value
-    |   VariableFuncName
-    |   functionCallNoTerminator
-    |   expr operator expr
-    |   LPAREN expr RPAREN
-    ;
-
 
 // 6) Function Declaration/Definition
 functionDeclaration
@@ -222,11 +215,11 @@ callParameter
 
 // 8) Arrays
 array
-    :   datatype arrayAssignment SEMI
+    :   datatype VariableFuncName arrayAssignment SEMI
     ;
 arrayAssignment
-    :   VariableFuncName LBRACK PositiveIntegerLiteral RBRACK
-    |   VariableFuncName LBRACK RBRACK ASSIGN LBRACE list RBRACE
+    :   LBRACK PositiveIntegerLiteral RBRACK
+    |   LBRACK RBRACK ASSIGN LBRACE list RBRACE
     ;
 list
     :   boolList
@@ -257,6 +250,7 @@ stringList
     ;
 
 // 9) Code Block
+// TODO: Add expression
 codeBlock
     :   declaration codeBlock
     |   assignment codeBlock
@@ -264,7 +258,7 @@ codeBlock
     |   loopStatement codeBlock
     |   functionCall codeBlock
     |   array codeBlock
-    |   expression codeBlock
+    // TODO: |   expression codeBlock
     |   // empty
     ;
 
@@ -306,7 +300,8 @@ VariableFuncName
 
 // Boolean Literal
 BooleanLiteral
-    :   BooleanWord
+    :   'true'
+    |   'false'
     ;
 
 // Char Literal
@@ -318,24 +313,20 @@ CharLiteral
 
 // Float Literal
 FloatLiteral
-
-    :// NegativeSign Digits '.' Digits
- /* |*/ Digits '.' Digits
-    |   IntegerLiteral
+    :   NegativeSign Digits '.' Digits
+    |   Digits '.' Digits
     ;
 
 // Integer Literal
 IntegerLiteral
     :   PositiveIntegerLiteral
-   // |   NegativeSign Digits
+    |   NegativeSign Digits
     ;
 
 // Positive Integer Literal
 PositiveIntegerLiteral
     :   Digit
     |   Digits
- // |   NegativeSign Digits
-
     ;
 
 // String Literal
@@ -349,31 +340,28 @@ NullLiteral
     ;
 
 // Fragments: Number related
-fragment
 Digits
     :   Digit+
     ;
 
-fragment
 Digit
     :   '+'?[0-9]
     ;
-
-/*
 
 fragment
 NegativeSign
     :   '-'
     ;
-*/
+
 fragment
 BooleanDigit
     :   [01]
     ;
 
-fragment
+
 BooleanWord
-    :   ('true' | 'false')
+    :   'true'
+    |   'false'
     ;
 
 // Fragments: Letters/Word related
