@@ -70,6 +70,7 @@ value
     |   CharLiteral
     |   FloatLiteral
     |   IntegerLiteral
+    |   NegativeIntegerLiteral
     |   StringLiteral
     ;
 
@@ -211,6 +212,7 @@ functionCallNoTerminator
 callParameter
     :   specialValue COMMA callParameter
     |   specialValue
+    |   //empty
     ;
 
 // 8) Arrays
@@ -218,7 +220,7 @@ array
     :   datatype VariableFuncName arrayAssignment SEMI
     ;
 arrayAssignment
-    :   LBRACK PositiveIntegerLiteral RBRACK
+    :   LBRACK IntegerLiteral RBRACK
     |   LBRACK RBRACK ASSIGN LBRACE list RBRACE
     ;
 list
@@ -241,8 +243,9 @@ floatList
     |   FloatLiteral
     ;
 integerList
-    :   IntegerLiteral COMMA integerList
+    :   (NegativeIntegerLiteral | IntegerLiteral) COMMA integerList
     |   IntegerLiteral
+    |   NegativeIntegerLiteral
     ;
 stringList
     :   StringLiteral COMMA stringList
@@ -320,7 +323,11 @@ FloatLiteral
 // Integer Literal
 IntegerLiteral
     :   PositiveIntegerLiteral
-    |   NegativeSign Digits
+    //|   NegativeSign Digits
+    ;
+
+NegativeIntegerLiteral
+    :   NegativeSign Digits
     ;
 
 // Positive Integer Literal
