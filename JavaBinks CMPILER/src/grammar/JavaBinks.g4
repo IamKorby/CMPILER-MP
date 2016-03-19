@@ -83,8 +83,7 @@ specialValue
 
 // 1) Variable Declaration/Initialization
 declaration
-    :   datatype singleDec SEMI
-    |   datatype multiDec SEMI
+    :   datatype multiDec SEMI
     ;
 multiDec
     :   singleDec COMMA multiDec
@@ -158,7 +157,7 @@ whileBlock
     :   WHILE LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
     ;
 doWhileBlock
-    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RBRACE SEMI
+    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RPAREN SEMI
     ;
 forBlock
     :   FOR LPAREN decValue SEMI conditionalExpression SEMI step RPAREN LBRACE codeBlock RBRACE
@@ -218,7 +217,7 @@ array
     :   datatype arrayAssignment SEMI
     ;
 arrayAssignment
-    :   VariableFuncName LBRACK Digits RBRACK
+    :   VariableFuncName LBRACK PositiveIntegerLiteral RBRACK
     |   VariableFuncName LBRACK RBRACK ASSIGN LBRACE list RBRACE
     ;
 list
@@ -300,8 +299,7 @@ VariableFuncName
 
 // Boolean Literal
 BooleanLiteral
-    :   BooleanDigit
-    |   BooleanWord
+    :   BooleanWord
     ;
 
 // Char Literal
@@ -315,14 +313,18 @@ CharLiteral
 FloatLiteral
     :   NegativeSign Digits '.' Digits
     |   Digits '.' Digits
-    |   IntegerLiteral
     ;
 
 // Integer Literal
 IntegerLiteral
+    :   PositiveIntegerLiteral
+    |   NegativeSign Digits
+    ;
+
+// Positive Integer Literal
+PositiveIntegerLiteral
     :   Digit
     |   Digits
-    |   NegativeSign Digits
     ;
 
 // String Literal
@@ -336,15 +338,17 @@ NullLiteral
     ;
 
 // Fragments: Number related
-
+fragment
 Digits
-    :   [0-9]+
+    :   Digit+
     ;
 
+fragment
 Digit
-    :   [0-9]
+    :   '+'?[0-9]
     ;
 
+fragment
 NegativeSign
     :   '-'
     ;
