@@ -77,7 +77,7 @@ value
 specialValue
     :   value
     |   VariableFuncName
-    // TODO: Add expression
+    |   expression
     |   functionCallNoTerminator
     ;
 
@@ -177,10 +177,18 @@ step
     |   VariableFuncName specialOperator IntegerLiteral
     ;
 
-// TODO: 5) Expressions
+// 5) Expressions
 expression
-    :
+    :   expr
     ;
+expr
+    :   value
+    |   VariableFuncName
+    |   functionCallNoTerminator
+    |   expr operator expr
+    |   LPAREN expr RPAREN
+    ;
+
 
 // 6) Function Declaration/Definition
 functionDeclaration
@@ -253,7 +261,6 @@ stringList
     ;
 
 // 9) Code Block
-// TODO: Add expression
 codeBlock
     :   declaration codeBlock
     |   assignment codeBlock
@@ -261,7 +268,7 @@ codeBlock
     |   loopStatement codeBlock
     |   functionCall codeBlock
     |   array codeBlock
-    // TODO: |   expression codeBlock
+    |   expression codeBlock
     |   // empty
     ;
 
