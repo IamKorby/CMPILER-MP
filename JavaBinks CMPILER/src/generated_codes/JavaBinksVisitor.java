@@ -334,4 +334,16 @@ public interface JavaBinksVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReturnMain(JavaBinksParser.ReturnMainContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaBinksParser#booleanLiteral}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanLiteral(JavaBinksParser.BooleanLiteralContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaBinksParser#comment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitComment(JavaBinksParser.CommentContext ctx);
 }

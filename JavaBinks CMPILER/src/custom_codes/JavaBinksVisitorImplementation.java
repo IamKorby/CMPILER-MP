@@ -337,6 +337,16 @@ public class JavaBinksVisitorImplementation implements JavaBinksVisitor<Integer>
 	}
 
 	@Override
+	public Integer visitBooleanLiteral(JavaBinksParser.BooleanLiteralContext ctx) {
+		return null;
+	}
+
+	@Override
+	public Integer visitComment(JavaBinksParser.CommentContext ctx) {
+		return null;
+	}
+
+	@Override
 	public Integer visit( ParseTree parseTree )
 	{
 		return null;

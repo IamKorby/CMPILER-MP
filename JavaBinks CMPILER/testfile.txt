@@ -46,7 +46,7 @@ int main()
 
 	boolean b[1];
 	int i[] = {1, -1, 2};
-
+    boolean b[] = {true, false, true};
 
 
 	get();
@@ -57,6 +57,12 @@ int main()
 void get1()
 {
     String hello = "HI";
+    meesa eeeeeyyyyy cholo
+    19 days
+    zhan zhengxi
+    jian yi
+    he tian
+     yousa
 }
 
 String getName(int i, String s, boolean b)

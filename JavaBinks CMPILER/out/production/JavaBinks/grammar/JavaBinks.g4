@@ -66,7 +66,7 @@ logicalOperator
     ;
 
 value
-    :   BooleanLiteral
+    :   booleanLiteral
     |   CharLiteral
     |   FloatLiteral
     |   IntegerLiteral
@@ -242,10 +242,8 @@ list
     ;
 // TODO: Fix boolean shits especially boolean b[] = {true};
 boolList
-//    :   BooleanLiteral COMMA boolList
-//    |   BooleanLiteral
-    :   (TRUE | FALSE) COMMA boolList
-    |   (TRUE | FALSE)
+    :   booleanLiteral COMMA boolList
+    |   booleanLiteral
     ;
 charList
     :   CharLiteral COMMA charList
@@ -274,6 +272,7 @@ codeBlock
     |   functionCall codeBlock
     |   array codeBlock
     |   expression codeBlock
+    |   comment codeBlock
     |   // empty
     ;
 
@@ -314,8 +313,9 @@ VariableFuncName
     ;
 
 // Boolean Literal
-BooleanLiteral
-    :   (TRUE | FALSE)
+booleanLiteral
+    :   'true'
+    |   'false'
     ;
 
 // Char Literal
@@ -370,11 +370,6 @@ NegativeSign
     :   '-'
     ;
 
-BooleanWord
-    :   'true'
-    |   'false'
-    ;
-
 // Fragments: Letters/Word related
 fragment
 Letters
@@ -394,14 +389,6 @@ Letter
 fragment
 StringCharacters
     :   [A-Za-z0-9 .!?_+\-,@#$%^&*();\\\/|<>"' ]*
-    ;
-
-TRUE
-    :   'true'
-    ;
-
-FALSE
-    :   'false'
     ;
 
 // Operators
@@ -444,8 +431,8 @@ COMMA       : ',';
 DOT         : '.';
 
 // Whitespace and comments
-COMMENT
-    :   'meesa ' .*? ' yousa' -> skip
+comment
+    :   'meesa ' .*? ' yousa'
     ;
 
 WS  :  [ \t\r\n\u000C]+ -> skip

@@ -25,8 +25,8 @@ public class JavaBinksMain {
 
 
         // TODO: Read testfile.txt (our test input), put in a String
-        String filename = "C:\\Users\\Justin\\Desktop\\Test.txt";
-	    //String filename = "testfile.txt";
+        //String filename = "C:\\Users\\Justin\\Desktop\\Test.txt";
+	    String filename = "testfile.txt";
         Scanner scanner = new Scanner(new File(filename));
 		String input = "";
 

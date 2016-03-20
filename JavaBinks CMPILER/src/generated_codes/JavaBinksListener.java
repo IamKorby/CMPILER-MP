@@ -547,4 +547,24 @@ public interface JavaBinksListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReturnMain(JavaBinksParser.ReturnMainContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaBinksParser#booleanLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanLiteral(JavaBinksParser.BooleanLiteralContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaBinksParser#booleanLiteral}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanLiteral(JavaBinksParser.BooleanLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaBinksParser#comment}.
+	 * @param ctx the parse tree
+	 */
+	void enterComment(JavaBinksParser.CommentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaBinksParser#comment}.
+	 * @param ctx the parse tree
+	 */
+	void exitComment(JavaBinksParser.CommentContext ctx);
 }

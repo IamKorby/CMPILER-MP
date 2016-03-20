@@ -659,6 +659,30 @@ public class JavaBinksBaseListener implements JavaBinksListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReturnMain(JavaBinksParser.ReturnMainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBooleanLiteral(JavaBinksParser.BooleanLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBooleanLiteral(JavaBinksParser.BooleanLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterComment(JavaBinksParser.CommentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitComment(JavaBinksParser.CommentContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
