@@ -6,10 +6,10 @@ grammar JavaBinks;
 // rule: (syntax: [name] : [definition] ;)
 
 start
-    :   main r
+    :   main r EOF
     ;
 r
-    :   functionDeclaration
+    :   functionDeclaration r
     |   // empty
     ;
 
@@ -70,21 +70,21 @@ value
     |   CharLiteral
     |   FloatLiteral
     |   IntegerLiteral
+    |   NegativeIntegerLiteral
     |   StringLiteral
     ;
 
 specialValue
     :   value
     |   VariableFuncName
-    // TODO: Add expression
+    |   expression
     |   functionCallNoTerminator
     ;
 
 
 // 1) Variable Declaration/Initialization
 declaration
-    :   datatype singleDec SEMI
-    |   datatype multiDec SEMI
+    :   datatype multiDec SEMI
     ;
 multiDec
     :   singleDec COMMA multiDec
@@ -98,6 +98,7 @@ singleDec
 // 2) Assignment Statement
 assignment
     :   VariableFuncName ASSIGN specialValue SEMI
+    |   VariableFuncName specialOperator specialValue SEMI
     ;
 
 // 3) Conditional Statement
@@ -158,7 +159,7 @@ whileBlock
     :   WHILE LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
     ;
 doWhileBlock
-    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RBRACE SEMI
+    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RPAREN SEMI
     ;
 forBlock
     :   FOR LPAREN decValue SEMI conditionalExpression SEMI step RPAREN LBRACE codeBlock RBRACE
@@ -169,25 +170,35 @@ decValue
     ;
 initValue
     :   IntegerLiteral
+    |   NegativeIntegerLiteral
     |   VariableFuncName
     ;
 step
     :   VariableFuncName special2Operator
-    |   VariableFuncName specialOperator IntegerLiteral
+    |   VariableFuncName specialOperator (IntegerLiteral | NegativeIntegerLiteral)
     ;
 
-// TODO: 5) Expressions
+// 5) Expressions
 expression
-    :
+    :   expr
     ;
+expr
+    :   value
+    |   VariableFuncName
+    |   functionCallNoTerminator
+    |   expr operator expr
+    |   LPAREN expr RPAREN
+    |   VariableFuncName special2Operator SEMI?
+    ;
+
 
 // 6) Function Declaration/Definition
 functionDeclaration
-    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
-    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
+    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
+    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
     ;
 declarationParameter
-    :   returntype VariableFuncName multiDeclarationParameter
+    :   singleDeclarationParameter multiDeclarationParameter
     |   singleDeclarationParameter
     ;
 multiDeclarationParameter
@@ -195,9 +206,10 @@ multiDeclarationParameter
     ;
 singleDeclarationParameter
     :   returntype VariableFuncName
+    |
     ;
 returnStatement
-    :   RETURN specialValue
+    :   RETURN specialValue SEMI
     ;
 
 // 7) Function Call
@@ -210,15 +222,16 @@ functionCallNoTerminator
 callParameter
     :   specialValue COMMA callParameter
     |   specialValue
+    |   //empty
     ;
 
 // 8) Arrays
 array
-    :   datatype arrayAssignment
+    :   datatype VariableFuncName arrayAssignment SEMI
     ;
 arrayAssignment
-    :   VariableFuncName LBRACK Digits RBRACK
-    |   VariableFuncName LBRACK RBRACK ASSIGN LBRACE list RBRACE
+    :   LBRACK IntegerLiteral RBRACK
+    |   LBRACK RBRACK ASSIGN LBRACE list RBRACE
     ;
 list
     :   boolList
@@ -227,9 +240,12 @@ list
     |   integerList
     |   stringList
     ;
+// TODO: Fix boolean shits especially boolean b[] = {true};
 boolList
-    :   BooleanLiteral COMMA boolList
-    |   BooleanLiteral
+//    :   BooleanLiteral COMMA boolList
+//    |   BooleanLiteral
+    :   (TRUE | FALSE) COMMA boolList
+    |   (TRUE | FALSE)
     ;
 charList
     :   CharLiteral COMMA charList
@@ -240,8 +256,9 @@ floatList
     |   FloatLiteral
     ;
 integerList
-    :   IntegerLiteral COMMA integerList
+    :   (NegativeIntegerLiteral | IntegerLiteral) COMMA integerList
     |   IntegerLiteral
+    |   NegativeIntegerLiteral
     ;
 stringList
     :   StringLiteral COMMA stringList
@@ -249,22 +266,23 @@ stringList
     ;
 
 // 9) Code Block
-// TODO: Add expression
 codeBlock
     :   declaration codeBlock
     |   assignment codeBlock
     |   conditionalStatement codeBlock
     |   loopStatement codeBlock
-    |   functionDeclaration codeBlock
     |   functionCall codeBlock
     |   array codeBlock
-    // TODO: |   expression codeBlock
+    |   expression codeBlock
     |   // empty
     ;
 
 // 10) Main
 main
-    :   INT 'main' LPAREN RPAREN LBRACE codeBlock RETURN IntegerLiteral SEMI RBRACE
+    :   INT 'main' LPAREN RPAREN LBRACE codeBlock returnMain SEMI RBRACE
+    ;
+returnMain
+    :   RETURN IntegerLiteral
     ;
 
 // LEXER TOKENS
@@ -292,13 +310,12 @@ VOID          : 'void';     // return type
 // Since Variable Name & Function Name are the same
 // COMBINE THEM ANYWAY
 VariableFuncName
-    :   Letters Digit*
+    :   Letters Digits?
     ;
 
 // Boolean Literal
 BooleanLiteral
-    :   BooleanDigit
-    |   BooleanWord
+    :   (TRUE | FALSE)
     ;
 
 // Char Literal
@@ -312,14 +329,21 @@ CharLiteral
 FloatLiteral
     :   NegativeSign Digits '.' Digits
     |   Digits '.' Digits
-    |   Digits
     ;
 
 // Integer Literal
 IntegerLiteral
-    :   '1'
-    //:   Digits
+    :   PositiveIntegerLiteral
     //|   NegativeSign Digits
+    ;
+
+NegativeIntegerLiteral
+    :   NegativeSign Digits
+    ;
+
+// Positive Integer Literal
+PositiveIntegerLiteral
+    :   '+'? Digits
     ;
 
 // String Literal
@@ -333,11 +357,9 @@ NullLiteral
     ;
 
 // Fragments: Number related
-
 Digits
-    :   [0-9]+
+    :   Digit+
     ;
-
 
 Digit
     :   [0-9]
@@ -348,14 +370,9 @@ NegativeSign
     :   '-'
     ;
 
-fragment
-BooleanDigit
-    :   [01]
-    ;
-
-fragment
 BooleanWord
-    :   ('true' | 'false')
+    :   'true'
+    |   'false'
     ;
 
 // Fragments: Letters/Word related
@@ -377,6 +394,14 @@ Letter
 fragment
 StringCharacters
     :   [A-Za-z0-9 .!?_+\-,@#$%^&*();\\\/|<>"' ]*
+    ;
+
+TRUE
+    :   'true'
+    ;
+
+FALSE
+    :   'false'
     ;
 
 // Operators
