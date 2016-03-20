@@ -32,9 +32,6 @@ public class SourceCodeChecker
 
 	public CheckerResult check( String input )
 	{
-		reset();
-
-		// Convert String input into FileInput then feed to ANTLRInputStream
 		InputStream is = new ByteArrayInputStream(input.getBytes());
 		ANTLRInputStream inputStream = null;
 		try
@@ -47,50 +44,47 @@ public class SourceCodeChecker
 		}
 
 		// Do Lexer stuff using JavaBinksLexer and LexerErrorListener
-		lexer = new JavaBinksLexer(inputStream);
-		tokens = new CommonTokenStream(lexer);
-		lexerErrorListener = new LexerErrorListener();
+		JavaBinksLexer lexer = new JavaBinksLexer(inputStream);
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		LexerErrorListener lexError = new LexerErrorListener();
 		lexer.removeErrorListeners();
-		lexer.addErrorListener(lexerErrorListener);
+		lexer.addErrorListener(lexError);
+		lexerErrorListener = lexError;
 
-		if( lexerErrorListener.hasErrors() )
+		// Do Parser stuff using JavaBinksParser and ParserErrorListener
+		JavaBinksParser parser = new JavaBinksParser(tokens);
+		ParserErrorListener parserError = new ParserErrorListener();
+		parser.removeErrorListeners();
+		parser.addErrorListener(parserError);
+		ParseTree tree = parser.start();
+		parserErrorListener = parserError;
+		this.parser = parser;
+		if( lexError.hasErrors() )
 		{
+			/*System.out.println("\nLEXICAL ERRORS FOUND!");
+			System.out.println(lexError);*/
 			return CheckerResult.LEXICAL_ERROR;
 		}
 		else
 		{
-			// Do Parser stuff using JavaBinksParser and ParserErrorListener
-			parser = new JavaBinksParser(tokens);
-			parserErrorListener = new ParserErrorListener();
-			parser.removeErrorListeners();
-			parser.addErrorListener(parserErrorListener);
-
-			if( parserErrorListener.hasErrors() )
+			if( parserError.hasErrors() )
 			{
+				/*System.out.println("\nSYNTAX ERRORS FOUND!");
+				System.out.println(parserError);*/
 				return CheckerResult.SYNTAX_ERROR;
 			}
 			else
 			{
-				// Generate abstract syntax tree
-				tree = parser.start();
+				/*System.out.println("NO LEXICAL AND SYNTACTICAL ERRORS FOUND!");
+				System.out.println(tree.toStringTree(parser));*/
 
-				treeViewer = new TreeViewer(Arrays.asList(parser.getRuleNames()), tree);
+				TreeViewer treeViewer = new TreeViewer(Arrays.asList(parser.getRuleNames()), tree);
 				treeViewer.setScale(1);
+				this.treeViewer = treeViewer;
 
 				return CheckerResult.NO_ERROR;
 			}
 		}
-	}
-
-	private void reset()
-	{
-		lexer = null;
-		tokens = null;
-		lexerErrorListener = null;
-		parser = null;
-		parserErrorListener = null;
-		tree = null;
-		treeViewer = null;
 	}
 
 	public String getLexicalError()
@@ -101,6 +95,11 @@ public class SourceCodeChecker
 	public String getSyntaxError()
 	{
 		return parserErrorListener.toString();
+	}
+
+	public JavaBinksParser getParser()
+	{
+		return parser;
 	}
 
 	public TreeViewer getAbstractSyntaxTree()

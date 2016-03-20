@@ -62,7 +62,8 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 	private JButton buttonCompile;
 	
 	private int caretStart;
-	private String inputSourceCode = "", fileSourceCode = "";
+	private boolean activeASTWindow = false;
+	private String inputSourceCode = "";
 
 	private SourceCodeChecker controller;
 
@@ -121,6 +122,7 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 		
 		buttonAST = new JButton("Abstract Syntax Tree");
 		buttonAST.setBounds(575, 7, 155, 23);
+		buttonAST.setEnabled(false);
 		buttonAST.addActionListener(this);
 		jpanel.add(buttonAST);
 		
@@ -210,6 +212,7 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 			abstractSyntaxTreeGUI.addWindowListener(this);
 			buttonAST.setEnabled(false);
 			buttonAST.setToolTipText("Only one Abstract Syntax Tree Window may be open at a time.");
+			activeASTWindow = true;
 		}
 	}
 
@@ -235,7 +238,6 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 		
 		if( sourceCode == null )
 		{
-			fileSourceCode = sourceCode;
 			textAreaCode.setText("");
 			JOptionPane.showMessageDialog(null, "File not found.");
 		}
@@ -313,7 +315,7 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 	public void keyReleased(KeyEvent e)
 	{
 		// TODO Auto-generated method stub
-		//checkCode();
+		checkCode();
 	}
 
 	@Override
@@ -332,14 +334,26 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 		if( checkerResult == CheckerResult.NO_ERROR )
 		{
 			textAreaLog.setText("No Lexical and Syntactical Errors.\n\nThe abstract syntax tree can now be viewed.");
+
+			if( abstractSyntaxTreeGUI != null )
+			{
+				abstractSyntaxTreeGUI.update();
+			}
+
+			if( !activeASTWindow )
+			{
+				buttonAST.setEnabled(true);
+			}
 		}
 		else if( checkerResult == CheckerResult.LEXICAL_ERROR )
 		{
 			textAreaLog.setText(controller.getLexicalError());
+			buttonAST.setEnabled(false);
 		}
 		else if( checkerResult == CheckerResult.SYNTAX_ERROR )
 		{
 			textAreaLog.setText(controller.getSyntaxError());
+			buttonAST.setEnabled(false);
 		}
 	}
 
@@ -390,6 +404,7 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 		// TODO Auto-generated method stub
 		if( e.getSource() == abstractSyntaxTreeGUI )
 		{
+			activeASTWindow = false;
 			buttonAST.setEnabled(true);
 			buttonAST.setToolTipText(null);
 		}

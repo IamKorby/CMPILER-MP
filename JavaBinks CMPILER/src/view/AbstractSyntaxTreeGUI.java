@@ -1,7 +1,9 @@
 package view;
 
 import controller.SourceCodeChecker;
+import generated_codes.JavaBinksParser;
 import org.antlr.v4.gui.TreeViewer;
+import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.awt.Color;
 import java.awt.event.ComponentEvent;
@@ -9,6 +11,7 @@ import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.ImageObserver;
+import java.util.Arrays;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -37,9 +40,9 @@ public class AbstractSyntaxTreeGUI extends JFrame implements ChangeListener
 		jpanel = new JPanel();
 		jpanel.setBackground(Color.GRAY);
 		jpanel.setSize(1300, 700);
-		jpanel.setLayout(null);
+		//jpanel.setLayout(null);
 		
-		scrollPane = new JScrollPane(jpanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane = new JScrollPane(jpanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setSize(1300, 700);
 		
 		spinnerScale = new JSpinner();
@@ -71,10 +74,16 @@ public class AbstractSyntaxTreeGUI extends JFrame implements ChangeListener
 		int value = (int) spinnerScale.getValue();
 
 		controller.setScale(value);
+
+		update();
 	}
 
 	public void update()
 	{
+		jpanel.remove(treeViewer);
 		treeViewer = controller.getAbstractSyntaxTree();
+		jpanel.add(treeViewer);
+		this.repaint();
+		this.revalidate();
 	}
 }
