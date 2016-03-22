@@ -1,4 +1,4 @@
-// Generated from /Users/hannah/Documents/IntelliJ Path/JavaBinks CMPILER/src/grammar/JavaBinks.g4 by ANTLR 4.5.1
+// Generated from C:/Users/WilliamPC/Documents/CMPILER/MP/JavaBinks CMPILER/src/grammar\JavaBinks.g4 by ANTLR 4.5.1
 package grammar;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
@@ -59,14 +59,14 @@ public class JavaBinksParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "':'", "'main'", "'true'", "'false'", "'meesa '", "' yousa'", "'fett'", 
-		"'clone'", "'kaminoans'", "'iloveyou'", "'storm'", "'stormtrooper'", "'force'", 
-		"'trooper'", "'kamino'", "'iknow'", "'jedi'", "'boolean'", "'char'", "'float'", 
-		"'int'", "'String'", "'void'", null, null, null, null, null, null, null, 
-		"'null'", null, null, "'+'", "'-'", "'*'", "'/'", "'%'", "'++'", "'--'", 
-		"'!'", "'&&'", "'||'", "'='", "'>'", "'<'", "'=='", "'>='", "'<='", "'!='", 
-		"'+='", "'-='", "'*='", "'/='", "'%='", "'('", "')'", "'{'", "'}'", "'['", 
-		"']'", "';'", "','", "'.'"
+		null, "':'", "'jarjarbinks'", "'true'", "'false'", "'meesa '", "' yousa'", 
+		"'fett'", "'clone'", "'kaminoans'", "'iloveyou'", "'storm'", "'stormtrooper'", 
+		"'force'", "'trooper'", "'kamino'", "'iknow'", "'jedi'", "'boolean'", 
+		"'char'", "'float'", "'int'", "'String'", "'void'", null, null, null, 
+		null, null, null, null, "'null'", null, null, "'+'", "'-'", "'*'", "'/'", 
+		"'%'", "'++'", "'--'", "'!'", "'&&'", "'||'", "'='", "'>'", "'<'", "'=='", 
+		"'>='", "'<='", "'!='", "'+='", "'-='", "'*='", "'/='", "'%='", "'('", 
+		"')'", "'{'", "'}'", "'['", "']'", "';'", "','", "'.'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, "BREAK", "CASE", "DEFAULT", 
