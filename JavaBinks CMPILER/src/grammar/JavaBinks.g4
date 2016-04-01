@@ -6,12 +6,12 @@ grammar JavaBinks;
 // rule: (syntax: [name] : [definition] ;)
 
 start
-    :   main r EOF
+    :   main functionDeclaration* EOF
     ;
-r
-    :   functionDeclaration r
-    |   // empty
-    ;
+//r
+//    :   functionDeclaration r
+//    |   // empty
+//    ;
 
 // RULES
 
@@ -217,12 +217,12 @@ functionCall
     :   VariableFuncName LPAREN callParameter RPAREN SEMI
     ;
 functionCallNoTerminator
-    :   VariableFuncName LPAREN callParameter RPAREN
+    :   VariableFuncName LPAREN callParameter* RPAREN
     ;
 callParameter
-    :   specialValue COMMA callParameter
+    :   specialValue COMMA callParameter+
     |   specialValue
-    |   //empty
+//    |   //empty
     ;
 
 // 8) Arrays
@@ -263,22 +263,30 @@ stringList
     |   StringLiteral
     ;
 
-// 9) Code Block
-codeBlock
-    :   declaration codeBlock
-    |   assignment codeBlock
-    |   conditionalStatement codeBlock
-    |   loopStatement codeBlock
-    |   functionCall codeBlock
-    |   array codeBlock
-    |   expression codeBlock
-    |   comment codeBlock
-    |   // empty
+// 9) Printer
+printer
+    :   PRINTER LPAREN StringLiteral RPAREN SEMI    // forcePrint("HelloWorld");
+    |   PRINTER LPAREN specialValue RPAREN SEMI     // forcePrint(func(a));
     ;
 
-// 10) Main
+// 10) Scanner
+
+// 11) Code Block
+codeBlock
+    :   declaration codeBlock*
+    |   assignment codeBlock*
+    |   conditionalStatement codeBlock*
+    |   loopStatement codeBlock*
+    |   functionCall codeBlock*
+    |   array codeBlock*
+    |   expression codeBlock*
+    |   comment codeBlock*
+//    |   // empty
+    ;
+
+// 12) Main
 main
-    :   INT 'main' LPAREN RPAREN LBRACE codeBlock returnMain SEMI RBRACE
+    :   INT 'main' LPAREN RPAREN LBRACE codeBlock* returnMain SEMI RBRACE
     ;
 returnMain
     :   RETURN IntegerLiteral
@@ -297,6 +305,7 @@ IF            : 'trooper';
 SWITCH        : 'kamino';
 WHILE         : 'iknow';
 RETURN        : 'jedi';
+PRINTER       : 'forcePrint';
 
 // Datatypes
 BOOLEAN       : 'boolean';

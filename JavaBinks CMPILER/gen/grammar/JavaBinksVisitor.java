@@ -17,12 +17,6 @@ public interface JavaBinksVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStart(JavaBinksParser.StartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JavaBinksParser#r}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitR(JavaBinksParser.RContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JavaBinksParser#datatype}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -316,6 +310,12 @@ public interface JavaBinksVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStringList(JavaBinksParser.StringListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JavaBinksParser#printer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPrinter(JavaBinksParser.PrinterContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JavaBinksParser#codeBlock}.
 	 * @param ctx the parse tree
