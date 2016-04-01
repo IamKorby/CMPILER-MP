@@ -286,7 +286,7 @@ codeBlock
 
 // 12) Main
 main
-    :   INT 'main' LPAREN RPAREN LBRACE codeBlock* returnMain SEMI RBRACE
+    :   INT 'jarjarbinks' LPAREN RPAREN LBRACE codeBlock* returnMain SEMI RBRACE
     ;
 returnMain
     :   RETURN IntegerLiteral

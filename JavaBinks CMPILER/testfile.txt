@@ -1,10 +1,11 @@
-int main()
+int jarjarbinks()
 {
 	int f = -111;
 	f = 1;
 	f = +1;
 	f = -1;
 	c = '1';
+	String s = "BANANANA";
 
 	j = 5 - 5;
 	z++;

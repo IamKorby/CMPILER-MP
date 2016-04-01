@@ -60,14 +60,14 @@ public class JavaBinksParser extends Parser {
 	};
 
 	private static final String[] _LITERAL_NAMES = {
-		null, "':'", "'main'", "'true'", "'false'", "'meesa '", "' yousa'", "'fett'", 
-		"'clone'", "'kaminoans'", "'iloveyou'", "'storm'", "'stormtrooper'", "'force'", 
-		"'trooper'", "'kamino'", "'iknow'", "'jedi'", "'forcePrint'", "'boolean'", 
-		"'char'", "'float'", "'int'", "'String'", "'void'", null, null, null, 
-		null, null, null, null, "'null'", null, null, "'+'", "'-'", "'*'", "'/'", 
-		"'%'", "'++'", "'--'", "'!'", "'&&'", "'||'", "'='", "'>'", "'<'", "'=='", 
-		"'>='", "'<='", "'!='", "'+='", "'-='", "'*='", "'/='", "'%='", "'('", 
-		"')'", "'{'", "'}'", "'['", "']'", "';'", "','", "'.'"
+		null, "':'", "'jarjarbinks'", "'true'", "'false'", "'meesa '", "' yousa'", 
+		"'fett'", "'clone'", "'kaminoans'", "'iloveyou'", "'storm'", "'stormtrooper'", 
+		"'force'", "'trooper'", "'kamino'", "'iknow'", "'jedi'", "'forcePrint'", 
+		"'boolean'", "'char'", "'float'", "'int'", "'String'", "'void'", null, 
+		null, null, null, null, null, null, "'null'", null, null, "'+'", "'-'", 
+		"'*'", "'/'", "'%'", "'++'", "'--'", "'!'", "'&&'", "'||'", "'='", "'>'", 
+		"'<'", "'=='", "'>='", "'<='", "'!='", "'+='", "'-='", "'*='", "'/='", 
+		"'%='", "'('", "')'", "'{'", "'}'", "'['", "']'", "';'", "','", "'.'"
 	};
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, null, null, null, null, null, null, "BREAK", "CASE", "DEFAULT", 
