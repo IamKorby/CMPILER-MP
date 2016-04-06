@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import custom_codes.JavaBinksVisitorImplementation;
 import custom_codes.LexerErrorListener;
 import custom_codes.ParserErrorListener;
 import generated_codes.JavaBinksLexer;
@@ -83,6 +84,9 @@ public class JavaBinksMain {
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        frame.setSize(200,200);
 		        frame.setVisible(true);
+
+		        JavaBinksVisitorImplementation visitor = new JavaBinksVisitorImplementation();
+
 
 		        /*try
 		        {
