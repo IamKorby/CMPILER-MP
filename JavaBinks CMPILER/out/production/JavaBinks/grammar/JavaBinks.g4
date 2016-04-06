@@ -6,12 +6,12 @@ grammar JavaBinks;
 // rule: (syntax: [name] : [definition] ;)
 
 start
-    :   main r EOF
+    :   main functionDeclaration* EOF
     ;
-r
-    :   functionDeclaration r
-    |   // empty
-    ;
+//r
+//    :   functionDeclaration r
+//    |   // empty
+//    ;
 
 // RULES
 
@@ -217,12 +217,12 @@ functionCall
     :   VariableFuncName LPAREN callParameter RPAREN SEMI
     ;
 functionCallNoTerminator
-    :   VariableFuncName LPAREN callParameter RPAREN
+    :   VariableFuncName LPAREN callParameter* RPAREN
     ;
 callParameter
-    :   specialValue COMMA callParameter
+    :   specialValue COMMA callParameter+
     |   specialValue
-    |   //empty
+//    |   //empty
     ;
 
 // 8) Arrays
@@ -263,22 +263,40 @@ stringList
     |   StringLiteral
     ;
 
-// 9) Code Block
-codeBlock
-    :   declaration codeBlock
-    |   assignment codeBlock
-    |   conditionalStatement codeBlock
-    |   loopStatement codeBlock
-    |   functionCall codeBlock
-    |   array codeBlock
-    |   expression codeBlock
-    |   comment codeBlock
-    |   // empty
+// 9) Printer
+printer
+    :   PRINTER LPAREN StringLiteral RPAREN SEMI    // forcePrint("HelloWorld");
+    |   PRINTER LPAREN specialValue RPAREN SEMI     // forcePrint(func(a));
     ;
 
-// 10) Main
+// 10) Scanner
+scanner
+    //:   datatype VariableFuncName ASSIGN SCANNER // int i = scanner.nextInt();
+    :   SCANNER LPAREN SCANNERINT COMMA VariableFuncName RPAREN SEMI // scanf("%d", &number);
+    |   SCANNER LPAREN SCANNERFLOAT COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN SCANNERBOOLEAN COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN SCANNERCHAR COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN SCANNERSTRING COMMA VariableFuncName RPAREN SEMI
+    ;
+
+// 11) Code Block
+codeBlock
+    :   declaration codeBlock*
+    |   assignment codeBlock*
+    |   conditionalStatement codeBlock*
+    |   loopStatement codeBlock*
+    |   functionCall codeBlock*
+    |   array codeBlock*
+    |   expression codeBlock*
+    |   comment codeBlock*
+    |   printer codeBlock*
+    |   scanner codeBlock*
+//    |   // empty
+    ;
+
+// 12) Main
 main
-    :   INT 'main' LPAREN RPAREN LBRACE codeBlock returnMain SEMI RBRACE
+    :   INT 'jarjarbinks' LPAREN RPAREN LBRACE codeBlock* returnMain SEMI RBRACE
     ;
 returnMain
     :   RETURN IntegerLiteral
@@ -297,6 +315,10 @@ IF            : 'trooper';
 SWITCH        : 'kamino';
 WHILE         : 'iknow';
 RETURN        : 'jedi';
+PRINTER       : 'forcePrint';
+// Scanner Keywords
+SCANNER       : 'forceScan';
+
 
 // Datatypes
 BOOLEAN       : 'boolean';
@@ -388,8 +410,15 @@ Letter
 
 fragment
 StringCharacters
-    :   [A-Za-z0-9 .!?_+\-,@#$%^&*();\\\/|<>"' ]*
+    :   [A-Za-z0-9 .!?_+\-,@#%$^&*();\\\/|<>"' ]*
     ;
+
+// Scanner Datatypes
+SCANNERINT      : '\'%d\'';
+SCANNERFLOAT    : '\'%f\'';
+SCANNERBOOLEAN  : '\'%b\'';
+SCANNERCHAR     : '\'%c\'';
+SCANNERSTRING   : '\'%s\'';
 
 // Operators
 ADD         : '+';
