@@ -272,11 +272,11 @@ printer
 // 10) Scanner
 scanner
     //:   datatype VariableFuncName ASSIGN SCANNER // int i = scanner.nextInt();
-    :   SCANNER LPAREN '"' '%' INT '"' COMMA VariableFuncName RPAREN SEMI // scanf("%d", &number);
-    |   SCANNER LPAREN '"' '%' FLOAT '"' COMMA VariableFuncName RPAREN SEMI
-    |   SCANNER LPAREN '"' '%' BOOLEAN '"' COMMA VariableFuncName RPAREN SEMI
-    |   SCANNER LPAREN '"' '%' CHAR '"' COMMA VariableFuncName RPAREN SEMI
-    |   SCANNER LPAREN '"' '%' STRING '"' COMMA VariableFuncName RPAREN SEMI
+    :   SCANNER LPAREN SCANNERINT COMMA VariableFuncName RPAREN SEMI // scanf("%d", &number);
+    |   SCANNER LPAREN SCANNERFLOAT COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN SCANNERBOOLEAN COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN SCANNERCHAR COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN SCANNERSTRING COMMA VariableFuncName RPAREN SEMI
     ;
 
 // 11) Code Block
@@ -289,6 +289,8 @@ codeBlock
     |   array codeBlock*
     |   expression codeBlock*
     |   comment codeBlock*
+    |   printer codeBlock*
+    |   scanner codeBlock*
 //    |   // empty
     ;
 
@@ -408,8 +410,15 @@ Letter
 
 fragment
 StringCharacters
-    :   [A-Za-z0-9 .!?_+\-,@#$%^&*();\\\/|<>"' ]*
+    :   [A-Za-z0-9 .!?_+\-,@#%$^&*();\\\/|<>"' ]*
     ;
+
+// Scanner Datatypes
+SCANNERINT      : '\'%d\'';
+SCANNERFLOAT    : '\'%f\'';
+SCANNERBOOLEAN  : '\'%b\'';
+SCANNERCHAR     : '\'%c\'';
+SCANNERSTRING   : '\'%s\'';
 
 // Operators
 ADD         : '+';
