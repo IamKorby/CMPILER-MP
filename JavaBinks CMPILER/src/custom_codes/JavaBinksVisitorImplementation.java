@@ -1,5 +1,6 @@
 package custom_codes;
 
+import com.sun.org.apache.xerces.internal.impl.dv.DatatypeException;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import generated_codes.JavaBinksBaseVisitor;
 import generated_codes.JavaBinksParser;
@@ -183,15 +184,62 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 		// TODO:
 
 		return null;
-	}
+	}*/
 
 	@Override
 	public Object visitAssignment( JavaBinksParser.AssignmentContext ctx )
 	{
-		// TODO:
+		if( ctx.getText() != null )
+		{
+			System.out.println("VISIT ASSIGNMENT:" + ctx.getText());
+			//:   VariableFuncName ASSIGN specialValue SEMI
+			//|   VariableFuncName specialOperator specialValue SEMI
+
+			if( ctx.getText().contains("="))
+			{
+				Symbol symbol = symbolTable.getCurrentScope().retrieve(ctx.VariableFuncName().getText());
+				Object o = null;
+
+				if( ctx.specialValue().expression() != null )
+				{
+					o = super.visit(ctx.specialValue().expression());
+				}
+				else if( ctx.specialValue().functionCallNoTerminator() != null )
+				{
+					o = super.visit(ctx.specialValue().functionCallNoTerminator());
+				}
+
+				symbol.setValue(o);
+				
+				symbolTable.getCurrentScope().update(symbol);
+
+				/*Object o = null;
+				//BOOLEAN, CHAR, FLOAT, FUNCTION, INT, STRING
+				if( symbol.getDatatype() == DataType.BOOLEAN )
+				{
+					o = Boolean.parseBoolean(ctx.specialValue().getText());
+				}
+				else if( symbol.getDatatype() == DataType.CHAR )
+				{
+					o = ctx.specialValue().getText().charAt(0);
+				}
+				else if( symbol.getDatatype() == DataType.FLOAT )
+				{
+					o = Float.parseFloat(ctx.specialValue().getText());
+				}
+				else if( symbol.getDatatype() == DataType.INT )
+				{
+					o = Integer.parseInt(ctx.specialValue().getText());
+				}
+				else if( symbol.getDatatype() == DataType.STRING )
+				{
+					o = ctx.specialValue().getText();
+				}*/
+			}
+		}
 
 		return null;
-	}*/
+	}
 
 	@Override
 	public Object visitConditionalStatement( JavaBinksParser.ConditionalStatementContext ctx )

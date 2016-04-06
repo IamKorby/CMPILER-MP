@@ -75,9 +75,7 @@ value
     ;
 
 specialValue
-    :   value
-    |   VariableFuncName
-    |   expression
+    :   expression
     |   functionCallNoTerminator
     ;
 

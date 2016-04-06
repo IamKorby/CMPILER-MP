@@ -22,27 +22,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="JavaBinks.g4" pinned="false" current-in-tab="true">
+      <file leaf-file-name="JavaBinks.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/grammar/JavaBinks.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3309859">
-              <caret line="80" column="27" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="8" />
+            <state vertical-scroll-proportion="-9.965517">
+              <caret line="92" column="44" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="44" />
               <folding>
-                <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-                <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+                <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+                <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="JavaBinksVisitorImplementation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="JavaBinksVisitorImplementation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/custom_codes/JavaBinksVisitorImplementation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="498" column="113" selection-start-line="498" selection-start-column="113" selection-end-line="498" selection-end-column="113" />
+            <state vertical-scroll-proportion="-0.08428246">
+              <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
               <folding>
-                <element signature="e#11135#11136#0" expanded="true" />
-                <element signature="e#11158#11159#0" expanded="true" />
+                <element signature="e#12576#12577#0" expanded="true" />
+                <element signature="e#12599#12600#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -137,9 +137,9 @@
         <option value="$PROJECT_DIR$/src/driver/Driver.java" />
         <option value="$PROJECT_DIR$/src/controller/SourceCodeChecker.java" />
         <option value="$PROJECT_DIR$/src/view/MainGUI.java" />
-        <option value="$PROJECT_DIR$/src/grammar/JavaBinks.g4" />
         <option value="$PROJECT_DIR$/src/model/Symbol.java" />
         <option value="$PROJECT_DIR$/src/model/ScoopsPre.java" />
+        <option value="$PROJECT_DIR$/src/grammar/JavaBinks.g4" />
         <option value="$PROJECT_DIR$/src/custom_codes/JavaBinksVisitorImplementation.java" />
       </list>
     </option>
@@ -692,7 +692,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.251497" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -702,12 +702,12 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46856287" sideWeight="0.50369686" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21766561" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21766561" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32868218" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645681" sideWeight="0.6979472" order="4" side_tool="false" content_ui="combo" x="201" y="96" width="231" height="668" />
-      <window_info id="ANTLR Preview" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46214512" sideWeight="0.49630314" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645681" sideWeight="0.3020528" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645681" sideWeight="0.7016129" order="4" side_tool="false" content_ui="combo" x="201" y="96" width="231" height="668" />
+      <window_info id="ANTLR Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46214512" sideWeight="0.49630314" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23645681" sideWeight="0.2983871" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -762,8 +762,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding>
-            <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-            <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
           </folding>
         </state>
       </provider>
@@ -783,8 +783,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="355" column="0" selection-start-line="355" selection-start-column="0" selection-end-line="355" selection-end-column="0" />
           <folding>
-            <element signature="e#11135#11136#0" expanded="true" />
-            <element signature="e#11158#11159#0" expanded="true" />
+            <element signature="e#12576#12577#0" expanded="true" />
+            <element signature="e#12599#12600#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -815,8 +815,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding>
-            <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-            <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
           </folding>
         </state>
       </provider>
@@ -857,8 +857,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-            <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
           </folding>
         </state>
       </provider>
@@ -868,8 +868,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-            <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
           </folding>
         </state>
       </provider>
@@ -879,8 +879,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-            <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
           </folding>
         </state>
       </provider>
@@ -890,8 +890,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-            <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
           </folding>
         </state>
       </provider>
@@ -1040,14 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/generated_codes/JavaBinks.tokens">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/SymbolTable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2846347">
@@ -1068,38 +1060,6 @@
           <folding>
             <element signature="e#956#957#0" expanded="true" />
             <element signature="e#985#986#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Symbol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="62" selection-start-line="57" selection-start-column="62" selection-end-line="57" selection-end-column="62" />
-          <folding>
-            <element signature="e#812#813#0" expanded="true" />
-            <element signature="e#872#873#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/DataType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/ScoopsPre.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
-          <folding>
-            <element signature="e#258#259#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
-            <element signature="e#561#562#0" expanded="true" />
-            <element signature="e#595#596#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1125,24 +1085,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/custom_codes/JavaBinksVisitorImplementation.java">
+    <entry file="file://$PROJECT_DIR$/src/generated_codes/JavaBinks.tokens">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="498" column="113" selection-start-line="498" selection-start-column="113" selection-end-line="498" selection-end-column="113" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Symbol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="62" selection-start-line="57" selection-start-column="62" selection-end-line="57" selection-end-column="62" />
           <folding>
-            <element signature="e#11135#11136#0" expanded="true" />
-            <element signature="e#11158#11159#0" expanded="true" />
+            <element signature="e#812#813#0" expanded="true" />
+            <element signature="e#872#873#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/ScoopsPre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="54" selection-start-line="29" selection-start-column="54" selection-end-line="29" selection-end-column="54" />
+          <folding>
+            <element signature="e#258#259#0" expanded="true" />
+            <element signature="e#306#307#0" expanded="true" />
+            <element signature="e#561#562#0" expanded="true" />
+            <element signature="e#595#596#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/DataType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="4" selection-start-line="7" selection-start-column="4" selection-end-line="7" selection-end-column="47" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/grammar/JavaBinks.g4">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3309859">
-          <caret line="80" column="27" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="8" />
+        <state vertical-scroll-proportion="-9.965517">
+          <caret line="92" column="44" selection-start-line="92" selection-start-column="32" selection-end-line="92" selection-end-column="44" />
           <folding>
-            <marker date="1459964556095" expanded="true" signature="5676:5781" placeholder=":...;" />
-            <marker date="1459964556095" expanded="true" signature="8517:8518" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="5637:5742" placeholder=":...;" />
+            <marker date="1459970634399" expanded="true" signature="8478:8479" placeholder=":...;" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/custom_codes/JavaBinksVisitorImplementation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.08428246">
+          <caret line="212" column="16" selection-start-line="212" selection-start-column="16" selection-end-line="212" selection-end-column="16" />
+          <folding>
+            <element signature="e#12576#12577#0" expanded="true" />
+            <element signature="e#12599#12600#0" expanded="true" />
           </folding>
         </state>
       </provider>
