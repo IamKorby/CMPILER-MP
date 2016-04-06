@@ -28,18 +28,6 @@ public class JavaBinksBaseListener implements JavaBinksListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterR(JavaBinksParser.RContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitR(JavaBinksParser.RContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDatatype(JavaBinksParser.DatatypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -623,6 +611,30 @@ public class JavaBinksBaseListener implements JavaBinksListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStringList(JavaBinksParser.StringListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPrinter(JavaBinksParser.PrinterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPrinter(JavaBinksParser.PrinterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterScanner(JavaBinksParser.ScannerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitScanner(JavaBinksParser.ScannerContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

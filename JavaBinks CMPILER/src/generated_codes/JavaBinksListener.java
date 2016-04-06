@@ -18,16 +18,6 @@ public interface JavaBinksListener extends ParseTreeListener {
 	 */
 	void exitStart(JavaBinksParser.StartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JavaBinksParser#r}.
-	 * @param ctx the parse tree
-	 */
-	void enterR(JavaBinksParser.RContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JavaBinksParser#r}.
-	 * @param ctx the parse tree
-	 */
-	void exitR(JavaBinksParser.RContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link JavaBinksParser#datatype}.
 	 * @param ctx the parse tree
 	 */
@@ -517,6 +507,26 @@ public interface JavaBinksListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStringList(JavaBinksParser.StringListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaBinksParser#printer}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrinter(JavaBinksParser.PrinterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaBinksParser#printer}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrinter(JavaBinksParser.PrinterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JavaBinksParser#scanner}.
+	 * @param ctx the parse tree
+	 */
+	void enterScanner(JavaBinksParser.ScannerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaBinksParser#scanner}.
+	 * @param ctx the parse tree
+	 */
+	void exitScanner(JavaBinksParser.ScannerContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JavaBinksParser#codeBlock}.
 	 * @param ctx the parse tree
