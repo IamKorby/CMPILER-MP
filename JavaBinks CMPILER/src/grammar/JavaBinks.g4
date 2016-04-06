@@ -6,7 +6,7 @@ grammar JavaBinks;
 // rule: (syntax: [name] : [definition] ;)
 
 start
-    :   main functionDeclaration* EOF
+    :   main functionDeclaration? EOF
     ;
 //r
 //    :   functionDeclaration r
@@ -116,13 +116,13 @@ elseIfBlock
     |   elseCondition
     ;
 ifCondition
-    :   IF LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
+    :   IF LPAREN conditionalExpression RPAREN LBRACE codeBlock? RBRACE
     ;
 elseCondition
-    :   ELSE LBRACE codeBlock RBRACE
+    :   ELSE LBRACE codeBlock? RBRACE
     ;
 elseIf
-    :   ELSEIF LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
+    :   ELSEIF LPAREN conditionalExpression RPAREN LBRACE codeBlock? RBRACE
     ;
 switchBlock
     :   SWITCH LPAREN conditionalExpression RPAREN LBRACE switchCase RBRACE
@@ -137,12 +137,12 @@ caseBlock
     |   caseCondition
     ;
 caseCondition
-    :   CASE value ':' LBRACE codeBlock RBRACE
-    |   CASE value ':' LBRACE codeBlock RBRACE BREAK SEMI
+    :   CASE value ':' LBRACE codeBlock? RBRACE
+    |   CASE value ':' LBRACE codeBlock? RBRACE BREAK SEMI
     ;
 defaultBlock
-    :   DEFAULT ':' LBRACE codeBlock RBRACE
-    |   DEFAULT ':' LBRACE codeBlock RBRACE BREAK SEMI
+    :   DEFAULT ':' LBRACE codeBlock? RBRACE
+    |   DEFAULT ':' LBRACE codeBlock? RBRACE BREAK SEMI
     ;
 conditionalExpression
     :   specialValue logicalOperator specialValue
@@ -156,13 +156,13 @@ loopStatement
     |   forBlock
     ;
 whileBlock
-    :   WHILE LPAREN conditionalExpression RPAREN LBRACE codeBlock RBRACE
+    :   WHILE LPAREN conditionalExpression RPAREN LBRACE codeBlock? RBRACE
     ;
 doWhileBlock
-    :   DO LBRACE codeBlock RBRACE WHILE LPAREN conditionalExpression RPAREN SEMI
+    :   DO LBRACE codeBlock? RBRACE WHILE LPAREN conditionalExpression RPAREN SEMI
     ;
 forBlock
-    :   FOR LPAREN decValue SEMI conditionalExpression SEMI step RPAREN LBRACE codeBlock RBRACE
+    :   FOR LPAREN decValue SEMI conditionalExpression SEMI step RPAREN LBRACE codeBlock? RBRACE
     ;
 decValue
     :   INT VariableFuncName ASSIGN initValue
@@ -194,8 +194,8 @@ expr
 
 // 6) Function Declaration/Definition
 functionDeclaration
-    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock returnStatement RBRACE
-    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock RBRACE
+    :   datatype VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock? returnStatement RBRACE functionDeclaration?
+    |   VOID VariableFuncName LPAREN declarationParameter RPAREN LBRACE codeBlock? RBRACE functionDeclaration?
     ;
 declarationParameter
     :   singleDeclarationParameter multiDeclarationParameter
@@ -214,13 +214,13 @@ returnStatement
 
 // 7) Function Call
 functionCall
-    :   VariableFuncName LPAREN callParameter RPAREN SEMI
+    :   VariableFuncName LPAREN callParameter? RPAREN SEMI
     ;
 functionCallNoTerminator
-    :   VariableFuncName LPAREN callParameter* RPAREN
+    :   VariableFuncName LPAREN callParameter? RPAREN
     ;
 callParameter
-    :   specialValue COMMA callParameter+
+    :   specialValue COMMA callParameter callParameter?
     |   specialValue
 //    |   //empty
     ;
@@ -281,25 +281,25 @@ scanner
 
 // 11) Code Block
 codeBlock
-    :   declaration codeBlock*
-    |   assignment codeBlock*
-    |   conditionalStatement codeBlock*
-    |   loopStatement codeBlock*
-    |   functionCall codeBlock*
-    |   array codeBlock*
-    |   expression codeBlock*
-    |   comment codeBlock*
-    |   printer codeBlock*
-    |   scanner codeBlock*
+    :   declaration codeBlock?
+    |   assignment codeBlock?
+    |   conditionalStatement codeBlock?
+    |   loopStatement codeBlock?
+    |   functionCall codeBlock?
+    |   array codeBlock?
+    |   expression codeBlock?
+    |   comment codeBlock?
+    |   printer codeBlock?
+    |   scanner codeBlock?
 //    |   // empty
     ;
 
 // 12) Main
 main
-    :   INT 'jarjarbinks' LPAREN RPAREN LBRACE codeBlock* returnMain SEMI RBRACE
+    :   INT 'jarjarbinks' LPAREN RPAREN LBRACE codeBlock? returnMain RBRACE
     ;
 returnMain
-    :   RETURN IntegerLiteral
+    :   RETURN IntegerLiteral SEMI
     ;
 
 // LEXER TOKENS
@@ -410,7 +410,7 @@ Letter
 
 fragment
 StringCharacters
-    :   [A-Za-z0-9 .!?_+\-,@#%$^&*();\\\/|<>"' ]*
+    :   [A-Za-z0-9 .!?_+\-,@#%$^&*();\\\/|<>"'~ ]*
     ;
 
 // Scanner Datatypes

@@ -30,6 +30,7 @@ public class JavaBinksMain {
 	    String filename = "testfile.txt";
         Scanner scanner = new Scanner(new File(filename));
 		String input = "";
+		Thread thread = null;
 
 	    while( scanner.hasNext() )
 	    {
@@ -84,9 +85,6 @@ public class JavaBinksMain {
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		        frame.setSize(200,200);
 		        frame.setVisible(true);
-
-		        JavaBinksVisitorImplementation visitor = new JavaBinksVisitorImplementation();
-
 
 		        /*try
 		        {

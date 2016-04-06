@@ -14,18 +14,25 @@ public class ScoopsPre
 		symbolTable = new HashMap<>();
 	}
 
-		public void declare( Symbol symbol )
-		{
-			symbolTable.put(symbol.getName(), symbol);
-		}
+	public void declare( Symbol symbol )
+	{
+		symbolTable.put(symbol.getName(), symbol);
+	}
 
 	public void update( Symbol symbol )
 	{
-		symbolTable.get(symbol.getName()).setValue(symbol.getValue());
+		if( symbolTable.get(symbol.getName()) != null )
+		{
+			symbolTable.replace(symbol.getName(), symbol);
+		}
+		else
+		{
+			symbolTable.put(symbol.getName(), symbol);
+		}
 	}
 
-	public Object retrieve( String key )
+	public Symbol retrieve( String key )
 	{
-		return symbolTable.get(key).getValue();
+		return symbolTable.get(key);
 	}
 }

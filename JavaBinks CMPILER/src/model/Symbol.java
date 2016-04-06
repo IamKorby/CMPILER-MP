@@ -52,4 +52,9 @@ public class Symbol
 	{
 		this.value = value;
 	}
+
+	public String toString()
+	{
+		return datatype.toString() + " " + name + " " + value;
+	}
 }

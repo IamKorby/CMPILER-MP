@@ -190,7 +190,7 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 		else if( e.getSource() == rdbtnFile )
 		{
 			// save copy of the data of input
-			inputSourceCode = textAreaCode.getText().toString();
+			inputSourceCode = textAreaCode.getText();
 			
 			readFile();
 		}
@@ -234,7 +234,7 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 	private void readFile()
 	{
 		String sourceCode = "";
-		sourceCode = FileReader.read(textFieldDirectory.getText().toString());
+		sourceCode = FileReader.read(textFieldDirectory.getText());
 		
 		if( sourceCode == null )
 		{
@@ -329,11 +329,14 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 	{
 		String input = textAreaCode.getText().toString();
 
+		SourceCodeChecker scc = new SourceCodeChecker(this);
+		this.controller = scc;
+
 		CheckerResult checkerResult = controller.check(input);
 
 		if( checkerResult == CheckerResult.NO_ERROR )
 		{
-			textAreaLog.setText("No Lexical and Syntactical Errors.\n\nThe abstract syntax tree can now be viewed.");
+			textAreaLog.setText("No Lexical and Syntactical Errors.\n\nThe abstract syntax tree can now be viewed.\n");
 
 			if( abstractSyntaxTreeGUI != null )
 			{
@@ -421,4 +424,10 @@ public class MainGUI extends JFrame implements ActionListener, DocumentListener,
 
 	@Override
 	public void windowOpened(WindowEvent e){}
+
+	public JTextArea getLogArea()
+	{
+		return textAreaLog;
+	}
+
 }
