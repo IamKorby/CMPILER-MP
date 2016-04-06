@@ -270,6 +270,14 @@ printer
     ;
 
 // 10) Scanner
+scanner
+    //:   datatype VariableFuncName ASSIGN SCANNER // int i = scanner.nextInt();
+    :   SCANNER LPAREN '"' '%' INT '"' COMMA VariableFuncName RPAREN SEMI // scanf("%d", &number);
+    |   SCANNER LPAREN '"' '%' FLOAT '"' COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN '"' '%' BOOLEAN '"' COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN '"' '%' CHAR '"' COMMA VariableFuncName RPAREN SEMI
+    |   SCANNER LPAREN '"' '%' STRING '"' COMMA VariableFuncName RPAREN SEMI
+    ;
 
 // 11) Code Block
 codeBlock
@@ -306,6 +314,9 @@ SWITCH        : 'kamino';
 WHILE         : 'iknow';
 RETURN        : 'jedi';
 PRINTER       : 'forcePrint';
+// Scanner Keywords
+SCANNER       : 'forceScan';
+
 
 // Datatypes
 BOOLEAN       : 'boolean';
