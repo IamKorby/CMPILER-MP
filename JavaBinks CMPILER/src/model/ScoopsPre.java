@@ -24,6 +24,7 @@ public class ScoopsPre
 		if( symbolTable.get(symbol.getName()) != null )
 		{
 			symbolTable.replace(symbol.getName(), symbol);
+
 		}
 		else
 		{
@@ -33,6 +34,6 @@ public class ScoopsPre
 
 	public Symbol retrieve( String key )
 	{
-		return symbolTable.get(key);
+		return (Symbol) symbolTable.get(key);
 	}
 }

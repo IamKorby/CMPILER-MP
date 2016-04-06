@@ -1,10 +1,14 @@
 package custom_codes;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
+import controller.Evaluator;
+import controller.ExprTokenizer;
+import controller.PrecedenceParser;
 import generated_codes.JavaBinksBaseVisitor;
 import generated_codes.JavaBinksParser;
 import generated_codes.JavaBinksVisitor;
 import model.DataType;
+import model.ExprToken;
 import model.Symbol;
 import model.SymbolTable;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -13,6 +17,7 @@ import org.antlr.v4.runtime.tree.RuleNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 /**
  * Created by Justin on 20/03/2016.
@@ -349,7 +354,19 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 	public Object visitExpression( JavaBinksParser.ExpressionContext ctx )
 	{
 		// TODO:
+		ArrayList<ExprToken> tokenList;
+		ArrayList<ExprToken> postFix;
+		if(ctx.getText() != null){
+			System.out.println("VISIT EXPRESSION: " +ctx.getText());
+			System.out.println(ctx.expr().getText());
+			tokenList = ExprTokenizer.tokenize(ctx.expr().getText());
+			postFix = PrecedenceParser.ConvertToPostFix(tokenList);
+			String result = Evaluator.evaluate(postFix);
+			System.out.println("Result: " +result);
 
+			return result;
+
+		}
 		return null;
 	}
 
@@ -558,6 +575,7 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 		}
 		else if( ctx.expression() != null )
 		{
+			System.out.println("In experession");
 			super.visit(ctx.expression());
 		}
 		else if( ctx.printer() != null )
