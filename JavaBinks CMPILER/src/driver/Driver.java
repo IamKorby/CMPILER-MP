@@ -9,5 +9,6 @@ public class Driver
 	{
 		SourceCodeChecker controller = new SourceCodeChecker();
 		MainGUI mainGUI = new MainGUI(controller);
+		controller.setView(mainGUI);
 	}
 }

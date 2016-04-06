@@ -1,6 +1,7 @@
 package controller;
 
 import custom_codes.CheckerResult;
+import custom_codes.JavaBinksVisitorImplementation;
 import custom_codes.LexerErrorListener;
 import custom_codes.ParserErrorListener;
 import generated_codes.JavaBinksLexer;
@@ -10,6 +11,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 import view.MainGUI;
 
+import javax.xml.transform.Source;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,7 +30,19 @@ public class SourceCodeChecker
 	ParseTree tree;
 	TreeViewer treeViewer;
 
+	Thread thread = null;
+
 	MainGUI mainGUI;
+
+	public SourceCodeChecker()
+	{
+
+	}
+
+	public SourceCodeChecker( MainGUI mainGUI )
+	{
+		this.mainGUI = mainGUI;
+	}
 
 	public CheckerResult check( String input )
 	{
@@ -58,6 +72,7 @@ public class SourceCodeChecker
 		parser.addErrorListener(parserError);
 		ParseTree tree = parser.start();
 		parserErrorListener = parserError;
+		this.tree = tree;
 		this.parser = parser;
 		if( lexError.hasErrors() )
 		{
@@ -81,6 +96,18 @@ public class SourceCodeChecker
 				TreeViewer treeViewer = new TreeViewer(Arrays.asList(parser.getRuleNames()), tree);
 				treeViewer.setScale(1);
 				this.treeViewer = treeViewer;
+
+				JavaBinksVisitorImplementation visitor = new JavaBinksVisitorImplementation(this.mainGUI.getLogArea(), this.tree);
+
+				if( thread != null )
+				{
+					thread.stop();
+				}
+				else
+				{
+					thread = new Thread(visitor);
+					thread.start();
+				}
 
 				return CheckerResult.NO_ERROR;
 			}
