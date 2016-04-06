@@ -518,6 +518,16 @@ public interface JavaBinksListener extends ParseTreeListener {
 	 */
 	void exitPrinter(JavaBinksParser.PrinterContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaBinksParser#scanner}.
+	 * @param ctx the parse tree
+	 */
+	void enterScanner(JavaBinksParser.ScannerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaBinksParser#scanner}.
+	 * @param ctx the parse tree
+	 */
+	void exitScanner(JavaBinksParser.ScannerContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaBinksParser#codeBlock}.
 	 * @param ctx the parse tree
 	 */

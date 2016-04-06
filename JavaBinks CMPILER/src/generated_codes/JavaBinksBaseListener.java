@@ -628,6 +628,18 @@ public class JavaBinksBaseListener implements JavaBinksListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterScanner(JavaBinksParser.ScannerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitScanner(JavaBinksParser.ScannerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCodeBlock(JavaBinksParser.CodeBlockContext ctx) { }
 	/**
 	 * {@inheritDoc}

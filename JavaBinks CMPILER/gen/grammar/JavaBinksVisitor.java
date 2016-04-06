@@ -317,6 +317,12 @@ public interface JavaBinksVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrinter(JavaBinksParser.PrinterContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JavaBinksParser#scanner}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScanner(JavaBinksParser.ScannerContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JavaBinksParser#codeBlock}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

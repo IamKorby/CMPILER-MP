@@ -374,6 +374,13 @@ public class JavaBinksBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitScanner(JavaBinksParser.ScannerContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitCodeBlock(JavaBinksParser.CodeBlockContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
