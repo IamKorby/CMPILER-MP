@@ -1,4 +1,4 @@
-// Generated from C:/Users/Justin/Documents/GitHub/CMPILER-MP/JavaBinks CMPILER/src/grammar\JavaBinks.g4 by ANTLR 4.5.1
+// Generated from /Users/hannah/Documents/IntelliJ Path/JavaBinks CMPILER/src/grammar/JavaBinks.g4 by ANTLR 4.5.1
 package generated_codes;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
