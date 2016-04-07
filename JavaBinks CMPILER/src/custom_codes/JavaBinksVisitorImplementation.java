@@ -8,10 +8,7 @@ import controller.PrecedenceParser;
 import generated_codes.JavaBinksBaseVisitor;
 import generated_codes.JavaBinksParser;
 import generated_codes.JavaBinksVisitor;
-import model.DataType;
-import model.ExprToken;
-import model.Symbol;
-import model.SymbolTable;
+import model.*;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.RuleNode;
@@ -500,10 +497,11 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 		// TODO:
 		ArrayList<ExprToken> tokenList;
 		ArrayList<ExprToken> postFix;
+		ScoopsPre currScope = symbolTable.getCurrentScope();
 		if(ctx.getText() != null){
 			System.out.println("VISIT EXPRESSION: " +ctx.getText());
 			System.out.println(ctx.expr().getText());
-			tokenList = ExprTokenizer.tokenize(ctx.expr().getText());
+			tokenList = ExprTokenizer.tokenize(ctx.expr().getText(), currScope);
 			postFix = PrecedenceParser.ConvertToPostFix(tokenList);
 			String result = Evaluator.evaluate(postFix);
 			System.out.println("Result: " +result);

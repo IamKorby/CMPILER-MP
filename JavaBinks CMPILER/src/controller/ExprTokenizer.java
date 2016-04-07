@@ -1,8 +1,6 @@
 package controller;
 
-import model.ExprList;
-import model.ExprToken;
-import model.ExprType;
+import model.*;
 
 import java.util.ArrayList;
 
@@ -13,7 +11,7 @@ public class ExprTokenizer {
 
     private static ArrayList<ExprToken> tokenList;
 
-    public static ArrayList<ExprToken> tokenize(String exp){
+    public static ArrayList<ExprToken> tokenize(String exp, ScoopsPre scope){
         tokenList = new ArrayList<>();
         String num = "";
         int currChar = 0;
@@ -73,7 +71,10 @@ public class ExprTokenizer {
                 // create a new TokenNode object containing the string value of the character and the tokentype unknown
                 // add the tokenNode object to the parsedInput arraylist
                 // increment currChar afterwards to check the next character
-                tokenList.add(new ExprToken(String.valueOf(exp.charAt(currChar)), ExprType.UNKNOWN));
+
+                Symbol symbol = scope.retrieve(Character.toString(exp.charAt(currChar)));
+                System.out.println("Symbol Value: " +symbol.getValue());
+                tokenList.add(new ExprToken(symbol.getValue().toString(),ExprType.OPERAND));
                 currChar++;
 
                 // this input has an unknown value, it fails the lexical analysis phase
