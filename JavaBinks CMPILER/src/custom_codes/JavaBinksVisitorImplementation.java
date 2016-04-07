@@ -244,7 +244,18 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 	@Override
 	public Object visitConditionalStatement( JavaBinksParser.ConditionalStatementContext ctx )
 	{
-		// TODO:
+		if( ctx.getText() != null )
+		{
+			System.out.println("VISIT CONDITIONAL STATEMENT: " + ctx.getText());
+			if(ctx.ifBlock().getText() != null)
+			{
+				super.visit(ctx.ifBlock());
+			}
+			else if(ctx.switchBlock().getText() != null)
+			{
+				super.visit(ctx.switchBlock());
+			}
+		}
 
 		return null;
 	}
@@ -252,7 +263,18 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 	@Override
 	public Object visitIfBlock( JavaBinksParser.IfBlockContext ctx )
 	{
-		// TODO:
+		if( ctx.getText() != null )
+		{
+			System.out.println("VISIT IF BLOCK: " + ctx.getText());
+			if(ctx.ifCondition().getText() != null)
+			{
+				super.visit(ctx.ifCondition());
+			}
+			if(ctx.elseIfBlock().getText() != null)
+			{
+				super.visit(ctx.elseIfBlock());
+			}
+		}
 
 		return null;
 	}
@@ -260,7 +282,23 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 	@Override
 	public Object visitElseIfBlock( JavaBinksParser.ElseIfBlockContext ctx )
 	{
-		// TODO:
+		if( ctx.getText() != null )
+		{
+			System.out.println("VISIT ELSE IF BLOCK: " + ctx.getText());
+			if(ctx.elseIf().getText() != null)
+			{
+				super.visit(ctx.elseIf());
+			}
+			else if(ctx.elseCondition().getText() != null)
+			{
+				super.visit(ctx.elseCondition());
+			}
+
+			if(ctx.elseIfBlock().getText() != null)
+			{
+				super.visit(ctx.elseIfBlock());
+			}
+		}
 
 		return null;
 	}
@@ -268,7 +306,31 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 	@Override
 	public Object visitIfCondition( JavaBinksParser.IfConditionContext ctx )
 	{
-		// TODO:
+		if( ctx.getText() != null )
+		{
+			System.out.println("VISIT IF CONDITION: " + ctx.getText());
+			if(ctx.IF().getText() != null)
+			{
+				if(ctx.conditionalExpression().getText() != null)
+				{
+					super.visit(ctx.conditionalExpression());
+				}
+				if(ctx.LBRACE().getText() != null)
+				{
+					symbolTable.enterScope();
+				}
+				if(ctx.codeBlock().getText() != null)
+				{
+					super.visit(ctx.codeBlock());
+				}
+				if(ctx.RBRACE().getText() != null)
+				{
+					symbolTable.exitScope();
+					System.out.println("SCOPE MAIN EXIT");
+				}
+			}
+
+		}
 
 		return null;
 	}
@@ -276,16 +338,50 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 	@Override
 	public Object visitElseCondition( JavaBinksParser.ElseConditionContext ctx )
 	{
-		// TODO:
+		symbolTable.enterScope();
 
+		if( ctx.getText() != null )
+		{
+			System.out.println("VISIT ELSE CONDITION: " + ctx.getText());
+			if(ctx.ELSE().getText() != null)
+			{
+				//TODO: ???
+			}
+			if(ctx.codeBlock().getText() != null)
+			{
+				super.visit(ctx.codeBlock());
+			}
+		}
+
+		symbolTable.exitScope();
+		System.out.println("SCOPE MAIN EXIT");
 		return null;
 	}
 
 	@Override
 	public Object visitElseIf( JavaBinksParser.ElseIfContext ctx )
 	{
-		// TODO:
+		symbolTable.enterScope();
 
+		if( ctx.getText() != null )
+		{
+			System.out.println("VISIT ELSE IF: " + ctx.getText());
+			if(ctx.ELSEIF().getText() != null)
+			{
+				//TODO: ???
+			}
+			if(ctx.conditionalExpression().getText() != null)
+			{
+				super.visit(ctx.conditionalExpression());
+			}
+			if(ctx.codeBlock().getText() != null)
+			{
+				super.visit(ctx.codeBlock());
+			}
+		}
+
+		symbolTable.exitScope();
+		System.out.println("SCOPE MAIN EXIT");
 		return null;
 	}
 
