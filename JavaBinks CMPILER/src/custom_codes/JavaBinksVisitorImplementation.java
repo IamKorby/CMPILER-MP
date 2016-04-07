@@ -206,10 +206,7 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 				{
 					o = super.visit(ctx.specialValue().expression());
 				}
-				else if( ctx.specialValue().functionCallNoTerminator() != null )
-				{
-					o = super.visit(ctx.specialValue().functionCallNoTerminator());
-				}
+
 
 				symbol.setValue(o);
 				

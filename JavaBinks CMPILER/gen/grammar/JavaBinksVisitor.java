@@ -161,6 +161,12 @@ public interface JavaBinksVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConditionalExpression(JavaBinksParser.ConditionalExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JavaBinksParser#conditionalExpression2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditionalExpression2(JavaBinksParser.ConditionalExpression2Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link JavaBinksParser#loopStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

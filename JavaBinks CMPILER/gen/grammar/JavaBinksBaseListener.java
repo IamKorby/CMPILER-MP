@@ -316,6 +316,18 @@ public class JavaBinksBaseListener implements JavaBinksListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterConditionalExpression2(JavaBinksParser.ConditionalExpression2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConditionalExpression2(JavaBinksParser.ConditionalExpression2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterLoopStatement(JavaBinksParser.LoopStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
