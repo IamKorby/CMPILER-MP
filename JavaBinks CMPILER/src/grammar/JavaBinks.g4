@@ -78,7 +78,7 @@ specialValue
 //    :   value
 //    :   VariableFuncName
     :   expression
-    |   functionCallNoTerminator
+//    |   functionCallNoTerminator
     ;
 
 
@@ -145,8 +145,11 @@ defaultBlock
     |   DEFAULT ':' LBRACE codeBlock? RBRACE BREAK SEMI
     ;
 conditionalExpression
-    :   specialValue logicalOperator specialValue
-    |   specialValue
+    :   specialValue conditionalExpression2?
+// (logicalOperator specialValue)?
+    ;
+conditionalExpression2
+    :   logicalOperator specialValue
     ;
 
 // 4) Loop/Iterative Statement
@@ -190,6 +193,18 @@ expr
     |   LPAREN expr RPAREN
     |   VariableFuncName special2Operator SEMI?
     ;
+
+//expr
+//    :   value
+//    |   VariableFuncName
+//    |   functionCallNoTerminator
+//    |   expr expr2
+//    |   LPAREN expr RPAREN
+//    |   VariableFuncName special2Operator SEMI?
+//    ;
+//expr2
+//    :   operator expr
+//    ;
 
 
 // 6) Function Declaration/Definition

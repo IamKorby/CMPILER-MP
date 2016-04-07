@@ -258,6 +258,16 @@ public interface JavaBinksListener extends ParseTreeListener {
 	 */
 	void exitConditionalExpression(JavaBinksParser.ConditionalExpressionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JavaBinksParser#conditionalExpression2}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionalExpression2(JavaBinksParser.ConditionalExpression2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JavaBinksParser#conditionalExpression2}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionalExpression2(JavaBinksParser.ConditionalExpression2Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link JavaBinksParser#loopStatement}.
 	 * @param ctx the parse tree
 	 */
