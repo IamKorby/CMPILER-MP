@@ -674,7 +674,7 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 				string = string.substring(1, string.length()-1);
 			}
 
-			textareaLog.append(string);
+			textareaLog.append(string + "\n");
 		}
 
 		return null;
