@@ -4,6 +4,7 @@ import com.sun.org.apache.xerces.internal.impl.dv.DatatypeException;
 import com.sun.org.apache.xpath.internal.SourceTree;
 import controller.Evaluator;
 import controller.ExprTokenizer;
+import controller.LogicParser;
 import controller.PrecedenceParser;
 import generated_codes.JavaBinksBaseVisitor;
 import generated_codes.JavaBinksParser;
@@ -308,28 +309,20 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 		if( ctx.getText() != null )
 		{
 			System.out.println("VISIT IF CONDITION: " + ctx.getText());
-			if(ctx.IF().getText() != null)
-			{
-				if(ctx.conditionalExpression().getText() != null)
-				{
-					super.visit(ctx.conditionalExpression());
-				}
-				if(ctx.LBRACE().getText() != null)
-				{
-					symbolTable.enterScope();
-				}
-				if(ctx.codeBlock().getText() != null)
-				{
-					super.visit(ctx.codeBlock());
-				}
-				if(ctx.RBRACE().getText() != null)
-				{
-					symbolTable.exitScope();
-					System.out.println("SCOPE MAIN EXIT");
-				}
-			}
+			if(ctx.IF().getText() != null) {
 
-		}
+						if (ctx.LBRACE().getText() != null) {
+							symbolTable.enterScope();
+						}
+						if (ctx.codeBlock().getText() != null) {
+							super.visit(ctx.codeBlock());
+						}
+						if (ctx.RBRACE().getText() != null) {
+							symbolTable.exitScope();
+							System.out.println("SCOPE MAIN EXIT");
+						}
+					}
+				}
 
 		return null;
 	}
@@ -428,6 +421,18 @@ public class JavaBinksVisitorImplementation extends JavaBinksBaseVisitor impleme
 	public Object visitConditionalExpression( JavaBinksParser.ConditionalExpressionContext ctx )
 	{
 		// TODO:
+		boolean pass = false;
+		ScoopsPre scoops = symbolTable.getCurrentScope();
+		LogicParser logic = new LogicParser();
+		String exp;
+		if(ctx.getText() != null){
+			exp = ctx.getText();
+			pass = logic.parseLogic(exp, scoops);
+
+			if(pass){
+				//super.visitCodeBlock(ctx.)
+			}
+		}
 
 		return null;
 	}
