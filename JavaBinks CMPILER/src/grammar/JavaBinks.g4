@@ -76,7 +76,7 @@ value
 
 specialValue
 //    :   value
-//    |   VariableFuncName
+//    :   VariableFuncName
     :   expression
     |   functionCallNoTerminator
     ;
@@ -107,12 +107,12 @@ conditionalStatement
     |   switchBlock
     ;
 ifBlock
-    :   ifCondition
-    |   ifCondition elseIfBlock
+    :   ifCondition elseIfBlock?
+//    |   ifCondition elseIfBlock
     ;
 elseIfBlock
-    :   elseIf elseIfBlock
-    |   elseIf
+    :   elseIf elseIfBlock?
+//    |   elseIf
     |   elseCondition
     ;
 ifCondition
