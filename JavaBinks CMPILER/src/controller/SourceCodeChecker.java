@@ -1,9 +1,6 @@
 package controller;
 
-import custom_codes.CheckerResult;
-import custom_codes.JavaBinksVisitorImplementation;
-import custom_codes.LexerErrorListener;
-import custom_codes.ParserErrorListener;
+import custom_codes.*;
 import generated_codes.JavaBinksLexer;
 import generated_codes.JavaBinksParser;
 import org.antlr.v4.gui.TreeViewer;
@@ -97,7 +94,7 @@ public class SourceCodeChecker
 				treeViewer.setScale(1);
 				this.treeViewer = treeViewer;
 
-				JavaBinksVisitorImplementation visitor = new JavaBinksVisitorImplementation(this.mainGUI.getLogArea(), this.tree);
+				JavaBinksVisitorImplementation2 visitor = new JavaBinksVisitorImplementation2(this.mainGUI.getLogArea(), this.tree);
 
 				if( thread != null )
 				{
