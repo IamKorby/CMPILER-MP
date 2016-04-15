@@ -1,0 +1,5 @@
+1. Run Jar File
+2. Type in the source code in the JTextArea, or get the source code from a text file
+3. The program will auto compile while the code is being typed
+4. Once the code already has no errors, the abstract syntax tree can be viewed
+5. Working functionalities are only declaration, assignment, expression and output / print
